@@ -1,0 +1,51 @@
+name = "Lax470956Proofs"
+defaultTargets = ["Lax470956Proofs"]
+
+[leanOptions]
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
+
+[[require]]
+name = "Lax470956"
+path = "../concepts"
+
+# the word RAM: machine and timed computation
+[[require]]
+name = "Lax808846"
+git = "https://github.com/lax-archive/lax-submissions"
+rev = "9394e531cc51cb67a0214bca3f9264dfe97ba5c7"
+subDir = "word-ram/concepts"
+
+# the word RAM's verified compilation pipeline, reused as proved theorems
+[[require]]
+name = "Lax808846Proofs"
+git = "https://github.com/lax-archive/lax-submissions"
+rev = "9394e531cc51cb67a0214bca3f9264dfe97ba5c7"
+subDir = "word-ram/proofs"
+
+# the RAM/TM equivalence's encoding lemmas, reused as proved theorems
+[[require]]
+name = "Lax759944"
+git = "https://github.com/szymtor/RAM-TM"
+rev = "134e398cef46599371df99f10c9007bc34ba3868"
+subDir = "concepts"
+
+[[require]]
+name = "Lax759944Proofs"
+git = "https://github.com/szymtor/RAM-TM"
+rev = "134e398cef46599371df99f10c9007bc34ba3868"
+subDir = "proofs"
+
+# polynomial-time Turing machine composition, reused as proved theorems
+[[require]]
+name = "Lax434930Proofs"
+git = "https://github.com/EdouardBonnet/classical-complexity"
+rev = "0c0840319318215fd7b36a9a822b81ce55cf6941"
+subDir = "proofs"
+
+[[lean_lib]]
+name = "Lax470956Proofs"
