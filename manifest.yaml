@@ -8,6 +8,67 @@ authors:
     github: yuvalyitz
   - name: Claude
 bibEntries:
-  - "@article{hermelin2024isem,\n  author  = {Hermelin, Danny and Itzhaki, Yuval and Molter, Hendrik and Shabtay, Dvir},\n  title   = {On the parameterized complexity of interval scheduling with eligible machine sets},\n  journal = {Journal of Computer and System Sciences},\n  volume  = {144},\n  pages   = {103533},\n  year    = {2024},\n  publisher = {Elsevier},\n  doi     = {10.1016/j.jcss.2024.103533}\n}\n"
-  - "@article{fellows2009multiinterval,\n  author  = {Fellows, Michael R. and Hermelin, Danny and Rosamond, Frances and Vialette, St{\\'e}phane},\n  title   = {On the parameterized complexity of multiple-interval graph problems},\n  journal = {Theoretical Computer Science},\n  volume  = {410},\n  number  = {1},\n  pages   = {53--61},\n  year    = {2009},\n  doi     = {10.1016/j.tcs.2008.09.065}\n}\n"
-  - "@article{tovey1984simplified,\n  author  = {Tovey, Craig A.},\n  title   = {A simplified {NP}-complete satisfiability problem},\n  journal = {Discrete Applied Mathematics},\n  volume  = {8},\n  number  = {1},\n  pages   = {85--89},\n  year    = {1984},\n  doi     = {10.1016/0166-218X(84)90081-7}\n}\n"
+  - "@article{hermelin2024isem,
+
+    \  author  = {Hermelin, Danny and Itzhaki, Yuval and Molter, Hendrik and
+    Shabtay, Dvir},
+
+    \  title   = {On the parameterized complexity of interval scheduling with
+    eligible machine sets},
+
+    \  journal = {Journal of Computer and System Sciences},
+
+    \  volume  = {144},
+
+    \  pages   = {103533},
+
+    \  year    = {2024},
+
+    \  publisher = {Elsevier},
+
+    \  doi     = {10.1016/j.jcss.2024.103533}
+
+    }\n"
+  - "@article{fellows2009multiinterval,
+
+    \  author  = {Fellows, Michael R. and Hermelin, Danny and Rosamond, Frances
+    and Vialette, St{\\'e}phane},
+
+    \  title   = {On the parameterized complexity of multiple-interval graph
+    problems},
+
+    \  journal = {Theoretical Computer Science},
+
+    \  volume  = {410},
+
+    \  number  = {1},
+
+    \  pages   = {53--61},
+
+    \  year    = {2009},
+
+    \  doi     = {10.1016/j.tcs.2008.09.065}
+
+    }\n"
+  - "@article{tovey1984simplified,
+
+    \  author  = {Tovey, Craig A.},
+
+    \  title   = {A simplified {NP}-complete satisfiability problem},
+
+    \  journal = {Discrete Applied Mathematics},
+
+    \  volume  = {8},
+
+    \  number  = {1},
+
+    \  pages   = {85--89},
+
+    \  year    = {1984},
+
+    \  doi     = {10.1016/0166-218X(84)90081-7}
+
+    }\n"
+issue:
+  repositoryId: 1320232165
+  number: 138
