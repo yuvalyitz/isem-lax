@@ -19,11 +19,11 @@ gives $P \in \mathrm{FPT}$.
 
 # Formalization notes
 
-The parameter is read off the input word rather than carried alongside it, so one program
-serves every parameter: a program that must be told $k$ from outside
-would be a family of programs, one per parameter, and could hide unbounded advice in its
-literals. The quantifier order says so — the program and the constant come before the
-instance, the parameter and the word length.
+The parameter is read off the input word, and the program is fixed before it: the
+quantifier order puts the program and the constant before the instance, the parameter and
+the word length. This is the uniformity of the definition. A definition that let the
+program be chosen after $k$ would describe a family of programs, one per parameter, which
+could hide unbounded advice in its literals.
 
 `Fits` is the fitting condition, stated as an explicit inequality against `2 ^ w` rather
 than through logarithms. It says of each entry $v$ of a word that $c(|x|+v+1) \le 2^w$,
@@ -39,9 +39,19 @@ this restricts the inputs rather than appearing as a hypothesis: as a hypothesis
 be empty, since no word length accommodates every encoding of a fixed instance at once.
 
 The bound is `c * g k * (x.length + 1)`, elementary rather than asymptotic, with the
-`+ 1` making it meaningful on the empty word. `g` is an arbitrary function of the
-parameter: it bounds a fixed program's running time rather than defining it, so no
-computability requirement on `g` is needed or intended.
+`+ 1` making it meaningful on the empty word. Its dependence on the length is linear,
+where the usual definition of FPT allows $g(k)\,|x|^{O(1)}$, so both notions defined here
+are the stricter ones: a problem that is fixed-parameter tractable in this sense is so in
+the usual sense, and a reduction that meets this bound is an fpt-reduction in the usual
+sense. A membership and a hardness proved against these definitions therefore imply their
+standard forms. Nothing weaker is defined because nothing weaker is needed — the dynamic
+program of Theorem 3 and the reduction of Theorem 1 both run within a linear bound.
+
+`g` is an arbitrary function of the parameter: it bounds a fixed program's running time
+rather than defining it, so no computability requirement on `g` is needed or intended.
+Some presentations of FPT require $g$ to be computable; the definition here does not, and
+the $g$ that Theorem 3 supplies is a closed-form expression in the parameter, so that
+theorem meets the definitions that require it as well.
 
 Only the timed notions are defined. Plain computability is the special case in which the
 bound is unconstrained, and is not what any statement of this submission needs.

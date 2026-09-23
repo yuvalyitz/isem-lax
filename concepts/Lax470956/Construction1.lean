@@ -57,10 +57,23 @@ whose running time is linear in its input cannot write more than that, so a grap
 few edges would put the bound out of reach. The edges are therefore enumerated, and there
 is exactly one slot per edge.
 
+Two details are done slightly differently from the paper. The paper gives the edge job of
+$\{u, v\}$, with $\mathrm{colour}(u) = \ell < \ell' = \mathrm{colour}(v)$, the processing
+time $(k+2)(\pi(v) - \pi(u)) - \ell + \ell'$; here it is one unit shorter,
+$(k+2)(\pi(v) - \pi(u)) - \ell + \ell' - 1$. With the paper's formula the edge job would
+start one unit before the job $j_u^{(\ell')}$ ends and the two would conflict; with the
+shorter one the five jobs that Lemma 1 places on an edge selection machine — the two colour
+combination jobs, $j_u^{(\ell')}$, the edge job and $j_v^{(\ell)}$ — occupy consecutive
+intervals, which is what the paper's Figure 1 shows, and Lemma 1's schedule is feasible.
+Colours are numbered $0, \dots, k-1$ rather than $1, \dots, k$. With colours from $1$ the
+colour combination job of the $\pi$-first vertex for the pair $(1, k)$ has processing
+time $(k+2) \cdot 1 - k - 2 = 0$; from $0$ every processing time is positive. Neither
+change affects the theorem: the weights, the machines and the argument are the paper's.
+
 Processing times and deadlines are clamped, exactly as in Construction 2: the raw formulas
-of the paper satisfy $0 < p \le d$ on every admissible slot, and the clamp is what
-discharges the two standing conventions without a hypothesis on slots where they are not
-defined. On an admissible slot the clamp is inactive.
+satisfy $0 < p \le d$ on every admissible slot, and the clamp is what discharges the two
+standing conventions without a hypothesis on slots where they are not defined. On an
+admissible slot the clamp is inactive.
 
 The order $\pi$ is not a parameter but a definition: vertices are ranked by colour, ties
 broken by index. The paper takes any order refining the colour order and the argument uses
@@ -144,7 +157,7 @@ noncomputable def pos (v : ℕ) : ℕ :=
 variable (G)
 
 -- A job index below `n·k` is a vertex job; the next `k²n` are colour combination slots
--- and the last `n²` are edge slots.
+-- and the rest, one per edge, are edge slots.
 
 /-- The vertex of vertex job `j`. -/
 def vjVert (j : ℕ) : ℕ := j / G.colours
@@ -178,8 +191,9 @@ the edge block does, so the block has no inert slots; the condition is here beca
 accessors below are total functions on slot numbers. -/
 noncomputable def EJobOk (q : ℕ) : Prop := q < (edgeList G).length
 
--- The raw formulas below are the paper's. An inert slot is given a unit job with no
--- eligible machine; on every admissible slot the clamp is inactive.
+-- The raw formulas below are the paper's, with the edge job one unit shorter and colours
+-- from zero, as the notes above say. An inert slot is given a unit job with no eligible
+-- machine; on every admissible slot the clamp is inactive.
 
 open Classical in
 /-- The paper's processing time of job `j`, before clamping. -/

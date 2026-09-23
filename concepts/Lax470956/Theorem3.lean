@@ -37,10 +37,12 @@ algorithm's table is indexed by machine configurations, there are $(p_{\max}+1)^
 a machine with $2^w$ cells cannot address a larger table, so without the clause the claimed
 time would not be achievable.
 
-`FPT` has no such clause, so the second statement is not a weakening of the first. Where the
-table does not fit, the word is longer than the table, hence bounded by a function of the
-parameter, and the proof tries every schedule instead. The function of the parameter is then
-much larger than $(m\,p_{\max})^{2m}$.
+`FPT` has no such clause, so the second statement is not a weakening of the first. The
+program compares the word's length with the table: when the word is at least as long as the
+table, the table fits, since every admissible word fits with room for a multiple of its
+length; when the word is shorter than the table, its length is bounded by a function of the
+parameter, and the program tries every schedule instead. The function of the parameter is
+then much larger than $(m\,p_{\max})^{2m}$.
 
 The program and the constant are quantified before the word length, so one program serves
 every word length that admits its input. A program chosen after the word length could hide an
