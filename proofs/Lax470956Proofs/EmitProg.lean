@@ -24,14 +24,14 @@ open Lax808846Proofs.Imp Lax808846Proofs.Compile Lax808846Proofs.Reasoning
 open Lax808846Proofs.Transfer
 open Lax470956.Exact34Encoding Lax470956.Construction2 Lax470956Proofs.Emit
 
-/-! ### Expression shorthands -/
+/-! ### Expression Shorthands -/
 
 private abbrev sub (e f : Expr) : Expr := .bin .sub e f
 private abbrev mul (e f : Expr) : Expr := .bin .mul e f
 private abbrev dvd (e f : Expr) : Expr := .bin .div e f
 private abbrev add (e f : Expr) : Expr := .bin .add e f
 
-/-! ### The program -/
+/-! ### The Program -/
 
 /-- Copy one entry of the clause block into the array. -/
 def readBody : Com :=
@@ -145,7 +145,7 @@ theorem const_eq : layout.const = 10 := by simp [Layout.const]
 
 variable (x : List ℕ)
 
-/-! ### Sizes of a well-formed formula -/
+/-! ### Sizes of a Well-Formed Formula -/
 
 /-- The word's length, in the names the construction uses. -/
 lemma wf_length (hwf : WellFormed x) : x.length = 2 + 9 * nCla x := hwf.length_eq
@@ -183,7 +183,7 @@ lemma entry_lt_bnd {v : ℕ} (hv : v ∈ x) : v < bnd x := by
   have := Lax470956Proofs.Pmax.le_foldr_max hv
   simp only [bnd]; omega
 
-/-! ### The copy loop -/
+/-! ### The Copy Loop -/
 
 /-- The state of the loop that copies the clause block into the array. -/
 def RInv (x : List ℕ) (σ : Env) : Prop :=
@@ -267,7 +267,7 @@ theorem arr_eq (hwf : WellFormed x) {σ : Env} (h : RInv x σ)
     List.getElem?_eq_getElem h1, List.getElem?_eq_getElem h2, Option.getD_some,
     Option.getD_some] at hi
 
-/-! ### The passes that write the blocks -/
+/-! ### The Passes That Write the Blocks -/
 
 /-- The context each output pass runs in: the header scalars and the clause array. -/
 def Ctx (x : List ℕ) (σ : Env) : Prop :=
@@ -323,7 +323,7 @@ lemma out_step' {g : ℕ → ℕ} {j v : ℕ} (h : v = g j) :
     (List.range j).map g ++ [v] = (List.range (j + 1)).map g := by
   rw [map_range_succ, h]
 
-/-! ### The weight pass -/
+/-! ### The Weight Pass -/
 
 theorem wtBody_spec (hwf : WellFormed x) (N : ℕ) (out0 : List ℕ) (hN : N ≤ nJobs x + 1) :
     Spec (bnd x) (fun σ => BInv x "n" N out0 (fun _ => 1) σ ∧ σ.vars "j" < N) wtBody
@@ -358,7 +358,7 @@ theorem wtLoop_spec (hwf : WellFormed x) (out0 : List ℕ) :
   blockLoop x (by have := nJobs_lt_bnd x hwf; omega)
     (wtBody_spec x hwf (nJobs x) out0 (by omega))
 
-/-! ### The offset pass -/
+/-! ### The Offset Pass -/
 
 lemma off_lt_bnd (hwf : WellFormed x) {j : ℕ} (hj : j ≤ nJobs x) :
     2 * nVar x + 3 * (j - nVar x) + 1 < bnd x := by
@@ -415,7 +415,7 @@ theorem offLoop_spec (hwf : WellFormed x) (out0 : List ℕ) :
       (24 * (nJobs x + 1) + 6) :=
   blockLoop x (nJobs_lt_bnd x hwf) (offBody_spec x hwf out0)
 
-/-! ### Decoding a clause job -/
+/-! ### Decoding a Clause Job -/
 
 lemma small_lt_bnd (hwf : WellFormed x) :
     40 * nCla x + 40 * nVar x + 64 < bnd x := by
@@ -485,7 +485,7 @@ theorem decode_spec (hwf : WellFormed x) (j : ℕ) (outj : List ℕ) :
     | (simp [dl]; omega)
     | (simp_all [dl]; omega)
 
-/-! ### What the clause-job passes write -/
+/-! ### What the Clause-Job Passes Write -/
 
 lemma procOf_lt {j : ℕ} (hj : j < nVar x) : procOf x j = 25 := by
   simp only [procOf, if_pos hj]
@@ -588,7 +588,7 @@ theorem dueDispatch_spec (hwf : WellFormed x) :
     have hd24 : σ.vars "d" ≤ 24 := by rw [hD.2.2.2.2.1]; exact dl_le x _ _
     exact ⟨hD, hs3, hd24, by have := hD.2.2.2.2.2.2.2.2.2.2.2.2; omega⟩
 
-/-! ### The processing-time and deadline passes -/
+/-! ### The Processing-Time and Deadline Passes -/
 
 theorem procBody_spec (hwf : WellFormed x) (out0 : List ℕ) :
     Spec (bnd x)
@@ -672,7 +672,7 @@ theorem dueLoop_spec (hwf : WellFormed x) (out0 : List ℕ) :
       (104 * nJobs x + 6) :=
   blockLoop x (by have := nJobs_lt_bnd x hwf; omega) (dueBody_spec x hwf out0)
 
-/-! ### The target pass -/
+/-! ### The Target Pass -/
 
 lemma flatMap_range_succ (g : ℕ → List ℕ) (j : ℕ) :
     (List.range (j + 1)).flatMap g = (List.range j).flatMap g ++ g j := by
@@ -806,7 +806,7 @@ theorem tgtLoop_spec (hwf : WellFormed x) (out0 : List ℕ) :
       (124 * nJobs x + 6) :=
   blockLoopL x (by have := nJobs_lt_bnd x hwf; omega) (tgtBody_spec x hwf out0)
 
-/-! ### The whole program -/
+/-! ### The Whole Program -/
 
 /-- The array lengths the program needs: one cell per entry of the clause block. -/
 def extOf (x : List ℕ) : String → ℕ := fun a => if a = "a" then 9 * nCla x else 0

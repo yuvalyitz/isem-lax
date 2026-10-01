@@ -24,7 +24,7 @@ open Lax808846.Ram Lax808846.RamComputes
 open Lax808846Proofs.Imp Lax808846Proofs.Compile Lax808846Proofs.Reasoning
 open Lax808846Proofs.Transfer
 
-/-! ### The program -/
+/-! ### The Program -/
 
 /-- `i < n`, the loop condition. -/
 def cond : Cond := .lt (.var "i") (.var "n")
@@ -50,7 +50,7 @@ def layout : Layout := ⟨["n", "m", "i", "best", "v"], [], 2⟩
 /-- The machine program. -/
 def prog : Program := compileProgram layout com
 
-/-! ### The domain, and what the program computes -/
+/-! ### The Domain, and What the Program Computes -/
 
 /-- Words shaped like an instance encoding: the job count, the machine count, then that
 many processing times, then whatever else the encoding carries. -/
@@ -123,7 +123,7 @@ theorem com_ok : Com.Ok layout com := by
 
 theorem const_eq : layout.const = 10 := by simp [Layout.const]
 
-/-! ### The loop -/
+/-! ### The Loop -/
 
 /-- The invariant: the counter has the processing times still to be read left to go,
 the largest read so far together with those still to come is the largest overall, and
@@ -190,7 +190,7 @@ theorem loop_run {B goal : ℕ} {rest : List ℕ} (σ₀ τ₀ : Env)
   refine ⟨σ', hrun.mono (by simp [cond]), ?_, hout⟩
   simpa using hmax
 
-/-! ### The whole program -/
+/-! ### The Whole Program -/
 
 theorem solves : Solves layout com dom
     (fun x => [Lax470956.SchedulingProblems.pmaxOf x])
@@ -257,7 +257,7 @@ theorem prog_computesInTime (w : ℕ) :
   simp only [Layout.span, layout, List.length_cons, List.length_nil, max_le_iff]
   omega
 
-/-! ### The domain of the concept statement -/
+/-! ### The Domain of the Concept Statement -/
 
 /-- A word encoding a decision instance has the shape the program expects: the job
 count, the machine count, then that many processing times, then the rest. -/

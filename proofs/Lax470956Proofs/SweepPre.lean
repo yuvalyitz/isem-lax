@@ -15,7 +15,7 @@ open Lax470956Proofs.SweepProg Lax470956Proofs.SweepTable Lax470956Proofs.SweepB
 
 variable {B : ℕ} {x : List ℕ} {n : ℕ}
 
-/-! ### The largest processing time -/
+/-! ### The Largest Processing Time -/
 
 /-- The largest of the first `N` processing times. -/
 def pmaxAux (x : List ℕ) (N : ℕ) : ℕ := ((List.range N).map (proc x)).foldr max 0
@@ -94,7 +94,7 @@ theorem pmaxLoop_spec (hxg : ∀ i, x.getD i 0 + 2 < B) (hB : 2 < B)
   rw [hP', hj', ← hjc]
   exact pmaxAux_jobCount x
 
-/-! ### The powers that index the table -/
+/-! ### The Powers That Index the Table -/
 
 /-- The state of the powers pass. -/
 def QInv (m P : ℕ) (σ : Env) : Prop :=
@@ -144,7 +144,7 @@ theorem powLoop_spec (hSB : (P + 1) ^ m + 2 < B) (hmB : m + 2 < B) (hPB : P + 2 
   intro i hi
   exact hcell' i (by omega)
 
-/-! ### The jobs of each deadline -/
+/-! ### The Jobs of Each Deadline -/
 
 /-- The jobs among the first `N` whose deadline is `d`, the most recent first. -/
 def jlist (f : ℕ → ℕ) (d : ℕ) : ℕ → List ℕ
@@ -283,7 +283,7 @@ theorem bucketLoop_spec (Lo : ℕ) (hxg : ∀ i, x.getD i 0 + 2 < B) (hB : 2 < B
   simp only [occB]
   by_cases hl : jlist (due x) d n = [] <;> simp [hl, List.isEmpty_iff]
 
-/-! ### Block starts, and the next deadline inside a block -/
+/-! ### Block Starts, and the Next Deadline Inside a Block -/
 
 open Lax470956Proofs.BlockWalk
 

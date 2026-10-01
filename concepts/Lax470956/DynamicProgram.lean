@@ -3,7 +3,7 @@ import Mathlib.Algebra.Order.Monoid.WithTop
 
 /-!
 ---
-title: The dynamic program for interval scheduling, and its state space
+title: The Dynamic Program for Interval Scheduling, and Its State Space
 type: definition
 ---
 The algorithm behind the third theorem. It sweeps the time axis, carrying at each
@@ -24,7 +24,7 @@ nothing. This is where fixed-parameter tractability comes from — the table is 
 the parameter, not by the instance — and it is why the preprocessing step, which bounds
 $a_t$ by a function of $m$ and $p_{\max}$ alone, completes the argument.
 
-# Formalization notes
+# Formalization Notes
 
 A state is a total function from machines to `Option` jobs, so a machine is idle exactly
 when it is mapped to `none`. Defining it as a partial injection would be closer to the

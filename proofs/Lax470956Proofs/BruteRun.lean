@@ -177,7 +177,7 @@ theorem dnStep_spec (hb : Bd B x I W) :
   simp only [List.mem_cons, List.not_mem_nil, or_false] at hy
   simp [hy]
 
-/-! ### The enumeration -/
+/-! ### The Enumeration -/
 
 /-- A string is good when the schedule it reads is feasible and reaches the threshold. -/
 def Good (I : Instance) (W t : ℕ) : Prop :=

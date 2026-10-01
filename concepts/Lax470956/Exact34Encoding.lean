@@ -2,7 +2,7 @@ import Lax470956.ParameterizedComplexity
 
 /-!
 ---
-title: Word encoding of a (3,4) formula
+title: Word Encoding of a (3,4) Formula
 type: definition
 ---
 A $(3,4)$ formula is handed to a word random access machine as a word of numbers:
@@ -10,7 +10,7 @@ the number of variables, the number of clauses, then three blocks of three numbe
 clause, one block per literal, giving the variable it mentions, whether the occurrence is
 positive, and which of the four occurrences of that variable it is.
 
-# Formalization notes
+# Formalization Notes
 
 "Every variable occurs at most four times" is split into the two consequences the
 two halves of the theorem actually use. `app_inj` — distinct occurrences of one variable

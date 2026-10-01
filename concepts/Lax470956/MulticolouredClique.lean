@@ -15,7 +15,7 @@ Parameterized by the number $k$ of colours, this problem is W[1]-complete. It is
 standard starting point for parameterized hardness proofs, because a reduction from it
 may assume the $k$ vertices of a solution are distinguishable in advance, one per colour.
 
-# Formalization notes
+# Formalization Notes
 
 The graph is a mathlib `SimpleGraph (Fin n)` and is encoded by the compressed sparse row
 format of `Lax271696.GraphEncoding`, so that an instance of this problem is an

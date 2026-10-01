@@ -21,7 +21,7 @@ def Base (x : List ℕ) (σ : Env) : Prop :=
     σ.vars "tb" = vn x + 1 ∧ σ.vars "cb" = vn x + 1 + 2 * ve x ∧
     σ.vars "k" = kk x ∧ σ.vars "nk" = vn x * kk x
 
-/-! ### The rank table -/
+/-! ### The Rank Table -/
 
 /-- The sweep in progress: `cnt` vertices numbered, and every vertex whose turn has come
 holds its rank. -/
@@ -120,7 +120,7 @@ theorem rankLoop_spec (hR : Reads x G) :
     (by have h1 := nk_le_nJobs hR; have h2 := nJobs_lt_bnd (x := x) (G := G); omega)
     (fun _ h => h.2.2.2.1) (fun _ h => h.1.2.2.2.2.2.2) (rankBody_spec hR)
 
-/-! ### The edge table -/
+/-! ### The Edge Table -/
 
 /-- The rank table, filled. -/
 def Ranked (x : List ℕ) (σ : Env) : Prop :=

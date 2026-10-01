@@ -33,7 +33,7 @@
 \newcommand{\Wone}{\textnormal{\textsf{W[1]}}}
 \newcommand{\NP}{\textnormal{\textsf{NP}}}
 
-\title{On the Parameterized Complexity of Interval Scheduling\\ with Eligible Machine Sets, Formalized}
+\title{Interval Scheduling with Eligible Machine Sets}
 \author{Yuval Itzhaki \and Claude}
 \date{}
 
@@ -371,42 +371,44 @@ $T_D[\bot,\ldots,\bot]$ is the maximum weight of a feasible schedule.
 % lax begin Lax470956.Theorem3
 \begin{theorem}\label{thm:fpt}
 There are a word RAM program and a constant $c$ such that for every instance $x$ of
-\ProbEM\ with target weight $W$ that fits into words, the program decides whether there is
+\ProbEM\ with target weight $W$, at every word length $w$ satisfying the input
+admissibility condition and $c(m\pmax+1)^{2m}\le 2^w$, the program decides whether there is
 a feasible schedule $\sigma$ with $w(\sigma)\ge W$ within
 \[
 c\cdot(m\cdot\pmax+1)^{2m}\cdot(m+1)\cdot(|x|+1)
 \]
-instructions. Hence \ProbEM\ is fixed-parameter tractable when parameterized by $m+\pmax$.
+instructions. A separate program decides all admissible inputs in fixed-parameter time
+for $m+\pmax$, using exhaustive search when the configuration table cannot be addressed.
 \end{theorem}
 % lax end
-This is the running time $\bigO((m\cdot\pmax)^{2m}\cdot mn)$ of~\cite{HIMS24} with explicit
-constants: by \Cref{obs:fpt} we have $|J_t|\le m^2\pmax^2$ after applying
+The explicit bound corresponds to $\bigO((m\cdot\pmax)^{2m}\cdot mn)$ in~\cite{HIMS24},
+with input length $|x|$ in place of the number of jobs and an address-space condition: by \Cref{obs:fpt} we have $|J_t|\le m^2\pmax^2$ after applying
 \Cref{con:effective}, so every table has at most $(m\cdot\pmax+1)^{2m}$ entries.
 
 \begin{thebibliography}{9}
 \bibitem{AS87}
 E.~M. Arkin and E.~B. Silverberg.
-\newblock Scheduling jobs with fixed start and end times.
+\newblock Scheduling Jobs with Fixed Start and End Times.
 \newblock \emph{Discrete Applied Mathematics} 18(1):1--8, 1987.
 \newblock \doi{10.1016/0166-218X(87)90037-0}
 \bibitem{FHRV09}
 M.~R. Fellows, D.~Hermelin, F.~Rosamond and S.~Vialette.
-\newblock On the parameterized complexity of multiple-interval graph problems.
+\newblock On the Parameterized Complexity of Multiple-Interval Graph Problems.
 \newblock \emph{Theoretical Computer Science} 410(1):53--61, 2009.
 \newblock \doi{10.1016/j.tcs.2008.09.065}
 \bibitem{HIMS24}
 D.~Hermelin, Y.~Itzhaki, H.~Molter and D.~Shabtay.
-\newblock On the parameterized complexity of interval scheduling with eligible machine sets.
+\newblock On the Parameterized Complexity of Interval Scheduling with Eligible Machine Sets.
 \newblock \emph{Journal of Computer and System Sciences} 144:103533, 2024.
 \newblock \doi{10.1016/j.jcss.2024.103533}
 \bibitem{MvB18}
 M.~Mnich and R.~van Bevern.
-\newblock Parameterized complexity of machine scheduling: 15 open problems.
+\newblock Parameterized Complexity of Machine Scheduling: 15 Open Problems.
 \newblock \emph{Computers \& Operations Research} 100:254--261, 2018.
 \newblock \doi{10.1016/j.cor.2018.07.020}
 \bibitem{Tovey84}
 C.~A. Tovey.
-\newblock A simplified NP-complete satisfiability problem.
+\newblock A Simplified NP-Complete Satisfiability Problem.
 \newblock \emph{Discrete Applied Mathematics} 8(1):85--89, 1984.
 \newblock \doi{10.1016/0166-218X(84)90081-7}
 \end{thebibliography}

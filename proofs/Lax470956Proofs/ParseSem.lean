@@ -26,7 +26,7 @@ def appOf (vs : List ℕ) (k : ℕ) : ℕ := (vs.take k).count (vs.getD k 0)
 def word (vs ss : List ℕ) (C : ℕ) : List ℕ :=
   [vs.length, C] ++ (List.range vs.length).flatMap fun k => [nameOf vs k, ss.getD k 0, appOf vs k]
 
-/-! ### Reading the word -/
+/-! ### Reading the Word -/
 
 lemma triples_length (f : ℕ → List ℕ) (hf : ∀ k, (f k).length = 3) (N : ℕ) :
     ((List.range N).flatMap f).length = 3 * N := by
@@ -79,7 +79,7 @@ lemma word_litApp (hC : vs.length = 3 * C) (c h : ℕ) (hc : c < C) (hh : h < 3)
   have := word_entry vs ss C (3 * c + h) 2 (by omega) (by omega)
   rw [litApp]; rw [show 2 + 9 * c + 3 * h + 2 = 2 + 3 * (3 * c + h) + 2 by omega, this]; rfl
 
-/-! ### Names and occurrence indices -/
+/-! ### Names and Occurrence Indices -/
 
 section names
 variable {vs}
@@ -249,7 +249,7 @@ theorem sat_iff {F : Formula} (hF : ∀ c ∈ F, c.length = 3) :
     show ρ _ = ρ _
     rw [getD_nameOf hk]
 
-/-! ### The parser -/
+/-! ### The Parser -/
 
 lemma occurrences_eq (F : Formula) (i : ℕ) : occurrences F i = (vsOf F).count i := by
   unfold occurrences vsOf litsOf

@@ -24,7 +24,7 @@ namespace Lax470956Proofs.Construction1Prog
 
 open Lax808846Proofs.Imp Lax808846Proofs.Compile
 
-/-! ### Expression shorthands -/
+/-! ### Expression Shorthands -/
 
 abbrev sub (e f : Expr) : Expr := .bin .sub e f
 abbrev mul (e f : Expr) : Expr := .bin .mul e f
@@ -36,14 +36,14 @@ abbrev bump (s : String) : Com := .assign s (add (V s) (.lit 1))
 /-- The colour of the vertex held in `s`. -/
 abbrev colOf (s : String) : Expr := .get "a" (add (V "cb") (V s))
 
-/-! ### Reading the word -/
+/-! ### Reading the Word -/
 
 def readBody : Com :=
   .seq (.read "v") (.seq (.store "a" (V "t") (V "v")) (bump "t"))
 
 def readLoop : Com := .seq (.assign "t" (.lit 0)) (.while (.lt (V "t") (V "L")) readBody)
 
-/-! ### The rank table -/
+/-! ### The Rank Table -/
 
 /-- Step `i` of the sweep looks at vertex `i mod n` on behalf of colour `i / n`. -/
 def rankBody : Com :=
@@ -55,7 +55,7 @@ def rankBody : Com :=
 
 def rankLoop : Com := .seq (.assign "i" (.lit 0)) (.while (.lt (V "i") (V "nk")) rankBody)
 
-/-! ### The edge table -/
+/-! ### The Edge Table -/
 
 /-- One turn of the scan: inside the owner's block, look at the slot; at its end, move
 the owner on. -/
@@ -71,7 +71,7 @@ def edgeBody : Com :=
 
 def edgeLoop : Com := .seq (.assign "i" (.lit 0)) (.while (.lt (V "i") (V "S")) edgeBody)
 
-/-! ### Everything about job `j` -/
+/-! ### Everything About Job `j` -/
 
 /-- `b(b-1)/2 + a`, the machine of the colour pair. -/
 abbrev pairE (a b : Expr) : Expr :=
@@ -176,7 +176,7 @@ def info : Com :=
           (.ite (.lt (V "j") (V "nkc")) cInfo eInfo))
        clamp
 
-/-! ### The passes -/
+/-! ### The Passes -/
 
 def procBody : Com := .seq info (.seq (.write (V "P")) (bump "j"))
 def dueBody : Com := .seq info (.seq (.write (V "D")) (bump "j"))
@@ -197,7 +197,7 @@ def tgtBody : Com :=
 def jobLoop (body : Com) (bound : String) : Com :=
   .seq (.assign "j" (.lit 0)) (.while (.lt (V "j") (V bound)) body)
 
-/-! ### The header -/
+/-! ### The Header -/
 
 def header1 : Com :=
   .seq (.assign "K" (add (V "k") (.lit 2)))
@@ -226,7 +226,7 @@ def header3 : Com :=
 
 def header : Com := .seq header1 (.seq header2 header3)
 
-/-! ### The reduction -/
+/-! ### The Reduction -/
 
 def setupA : Com :=
   .seq (.read "n") (.seq (.read "m")

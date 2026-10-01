@@ -69,7 +69,7 @@ theorem com_spec (hR : Reads x G) :
     have hWv : _ = targetWeight G := hctx.2.2.2.2.2.2.2.2.2.2.2.2.1
     simp only [hWv]; omega
 
-/-! ### From the specification to the machine -/
+/-! ### From the Specification to the Machine -/
 
 open Classical in
 /-- The instance a word is read as, and an arbitrary one for a word that is none. -/

@@ -17,7 +17,7 @@ open Lax470956.Scheduling Lax470956.Exact34Encoding Lax470956.Construction2
 
 variable {x : List ℕ}
 
-/-! ### Non-overlap of a chain of three jobs -/
+/-! ### Non-Overlap of a Chain of Three Jobs -/
 
 private lemma ovl_symm {I : Instance} {j j' : Fin I.jobs} (h : I.Overlap j j') :
     I.Overlap j' j := ⟨h.2, h.1⟩
@@ -41,7 +41,7 @@ private lemma not_ovl_chain3 {I : Instance} {j₁ j₂ j₃ : Fin I.jobs}
       | exact not_ovl_of_le (by omega)
       | exact fun hc => not_ovl_of_le (by omega) (ovl_symm hc)
 
-/-! ### The transposition that distributes a clause's jobs -/
+/-! ### The Transposition That Distributes a Clause's Jobs -/
 
 lemma fin3_cases (a : Fin 3) : a = 0 ∨ a = 1 ∨ a = 2 := by revert a; decide
 
@@ -53,7 +53,7 @@ lemma swap_eq_zero_iff (a b : Fin 3) : Equiv.swap a 0 b = 0 ↔ b = a := by
   · rintro rfl
     exact Equiv.swap_apply_left _ _
 
-/-! ### The schedule -/
+/-! ### The Schedule -/
 
 variable (hwf : WellFormed x) (τ : ℕ → Bool) (sel : Fin (nCla x) → Fin 3)
 

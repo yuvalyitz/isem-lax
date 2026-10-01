@@ -5,7 +5,7 @@ import Mathlib.Data.Nat.Bits
 
 /-!
 ---
-title: Binary encoding of a scheduling instance
+title: Binary Encoding of a Scheduling Instance
 type: definition
 ---
 A scheduling instance as a binary word, the representation classical complexity measures
@@ -14,7 +14,7 @@ unary, which makes the encoding self-delimiting; an instance is the number of jo
 number of machines, the three arrays of processing times, deadlines and weights, and the
 $n \times m$ eligibility matrix, in that order.
 
-# Formalization notes
+# Formalization Notes
 
 This encoding exists beside the word encoding of `InstanceEncoding` and does not replace
 it. They answer different questions. A word RAM is handed numbers and charges one

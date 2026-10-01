@@ -86,7 +86,7 @@ lemma isStart_iff (hocc0 : occ 0 = false) (d : ℕ) :
     · rw [hz]; exact hocc0
     · exact h2 (d - 1 - e) (by omega) (by omega)
 
-/-! ### The walk -/
+/-! ### The Walk -/
 
 variable (P : ℕ) (occ : ℕ → Bool) (M : ℕ)
 

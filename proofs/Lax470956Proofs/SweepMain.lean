@@ -21,7 +21,7 @@ open Lax470956Proofs.ReadHdr (readWord readWord_spec)
 
 variable {B : ℕ} {x : List ℕ}
 
-/-! ### The word determines the instance -/
+/-! ### The Word Determines the Instance -/
 
 lemma encodes_unique {y : List ℕ} {I I' : Instance} (h : EncodesInstance y I)
     (h' : EncodesInstance y I') : I = I' := by
@@ -59,7 +59,7 @@ lemma decision_unique {x : List ℕ} {I I' : Instance} {W W' : ℕ}
   subst he1
   exact ⟨encodes_unique hy hy', by simpa using he2⟩
 
-/-! ### The threshold is met exactly when it is at most the optimum -/
+/-! ### The Threshold Is Met Exactly When It Is at Most the Optimum -/
 
 lemma hasWeight_iff (I : Instance) (W : ℕ) : I.HasWeight W ↔ W ≤ optimum I := by
   constructor
@@ -74,7 +74,7 @@ lemma hasWeight_iff (I : Instance) (W : ℕ) : I.HasWeight W ↔ W ≤ optimum I
     rw [optimum, heq] at h
     exact h
 
-/-! ### What the decision word says -/
+/-! ### What the Decision Word Says -/
 
 lemma getD_app_left {y : List ℕ} {W i : ℕ} (h : i < y.length) :
     (y ++ [W]).getD i 0 = y.getD i 0 := by
@@ -149,7 +149,7 @@ theorem enc_of_decision {x : List ℕ} {I : Instance} {W : ℕ}
       List.getD_eq_getElem?_getD, List.getElem?_append_right (by omega)]
     simp
 
-/-! ### The header -/
+/-! ### The Header -/
 
 theorem header_spec (n m W : ℕ) (hx : ∀ i, x.getD i 0 + 2 < B) (hxB : x.length + 2 < B)
     (hlen : 3 + 4 * n ≤ x.length) (hjc : x.getD 0 0 = n) (hmc : x.getD 1 0 = m)
@@ -209,7 +209,7 @@ theorem header_spec (n m W : ℕ) (hx : ∀ i, x.getD i 0 + 2 < B) (hxB : x.leng
       (Run.seq (Run.assign e4) (Run.seq (Run.assign e5) (Run.assign e6)))))).mono
       (by norm_num [Expr.size]), ?_, ?_, ?_, ?_, ?_, ?_⟩ <;> simp [Env.setVar]
 
-/-! ### Numeric facts about the word -/
+/-! ### Numeric Facts About the Word -/
 
 /-- The largest entry. -/
 def mxE (x : List ℕ) : ℕ := x.foldr max 0
@@ -248,7 +248,7 @@ lemma lt_pow_self {P m : ℕ} (hm : 0 < m) : P < (P + 1) ^ m := by
     _ = (P + 1) ^ 1 := (pow_one _).symm
     _ ≤ (P + 1) ^ m := Nat.pow_le_pow_right (by omega) hm
 
-/-! ### The state the passes start from -/
+/-! ### The State the Passes Start from -/
 
 /-- The arrays, as the initial environment leaves them. -/
 structure Fresh (n m S Lo : ℕ) (σ : Env) : Prop where
@@ -267,7 +267,7 @@ structure Fresh (n m S Lo : ℕ) (σ : Env) : Prop where
   zocc : ∀ d, (σ.arrs "occ").getD d 0 = 0
   zfj : ∀ d, (σ.arrs "fj").getD d 0 = 0
 
-/-! ### The numeric facts every pass runs under -/
+/-! ### The Numeric Facts Every Pass Runs Under -/
 
 variable {Lo : ℕ}
 
@@ -360,7 +360,7 @@ lemma pjP (h : Sizes B x I W Lo) (j : Fin I.jobs) : I.p j ≤ pmaxOf x := by
 
 end Sizes
 
-/-! ### The main pass -/
+/-! ### The Main Pass -/
 
 set_option maxHeartbeats 2000000 in
 theorem mainWork_spec {I : Instance} {W : ℕ} (hs : Sizes B x I W Lo) :
@@ -633,7 +633,7 @@ theorem mainWork_spec {I : Instance} {W : ℕ} (hs : Sizes B x I W Lo) :
       = 84 * (offset x I.jobs * S) + 24 * offset x I.jobs := by ring
   omega
 
-/-! ### The degenerate cases -/
+/-! ### The Degenerate Cases -/
 
 lemma optimum_eq_zero_of_machines {I : Instance} (h : I.machines = 0) : optimum I = 0 := by
   refine Nat.le_antisymm (Finset.sup_le fun σ hσ => ?_) (Nat.zero_le _)
@@ -651,7 +651,7 @@ lemma optimum_eq_zero_of_jobs {I : Instance} (h : I.jobs = 0) : optimum I = 0 :=
   simp only [Instance.weight]
   rw [Finset.sum_eq_zero fun j _ => absurd j.isLt (by omega)]
 
-/-! ### The whole program -/
+/-! ### The Whole Program -/
 
 set_option maxHeartbeats 1000000 in
 theorem com_spec {I : Instance} {W : ℕ} (hdec : EncodesDecisionInstance x I W)
@@ -745,7 +745,7 @@ theorem com_spec {I : Instance} {W : ℕ} (hdec : EncodesDecisionInstance x I W)
       simp only [Cond.size, Expr.size]
       omega
 
-/-! ### The machine program -/
+/-! ### The Machine Program -/
 
 /-- The value bound the program runs under. -/
 def Bof (x : List ℕ) : ℕ :=

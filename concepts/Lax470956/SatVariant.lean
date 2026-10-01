@@ -4,7 +4,7 @@ import Lax470956.NPHardness
 
 /-!
 ---
-title: (3,4)-satisfiability
+title: (3,4)-Satisfiability
 type: definition
 ---
 *(3,4)-SAT* is satisfiability restricted to formulas in which every clause contains
@@ -13,7 +13,7 @@ that it is NP-hard; it is the starting point of the second theorem of this submi
 because the bounded number of occurrences is what keeps the processing times of the
 scheduling instance the reduction builds bounded by an absolute constant.
 
-# Formalization notes
+# Formalization Notes
 
 The restriction is a predicate on the CNF formulas of the archive's Cook–Levin submission,
 so the encoding and the notion of satisfiability are shared with unrestricted SAT.

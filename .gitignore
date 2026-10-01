@@ -4,3 +4,17 @@ paper-web.tar
 lake-manifest.json
 .lake/
 .DS_Store
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+/paper/main.pdf
+.env
+.env.*
+*.pem
+*.key
+.claude/
+.codex/
+.agents/

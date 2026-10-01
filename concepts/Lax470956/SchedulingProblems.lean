@@ -3,7 +3,7 @@ import Lax470956.ParameterizedComplexity
 
 /-!
 ---
-title: The scheduling problems, parameterized
+title: The Scheduling Problems, Parameterized
 type: definition
 ---
 Interval scheduling with eligible machine sets, as parameterized problems on words:
@@ -15,7 +15,7 @@ The three theorems of this submission are about these three problems: the first 
 W[1]-hard, the second is fixed-parameter tractable, and the third is NP-hard already
 when its parameter is bounded by an absolute constant.
 
-# Formalization notes
+# Formalization Notes
 
 Each parameter is read off the word rather than supplied beside it. The number of
 machines is the word's second entry, so it costs a program nothing to obtain; $p_{\max}$

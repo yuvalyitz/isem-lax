@@ -121,7 +121,7 @@ lemma weightStarted_succ {σ : I.Schedule} (hfeas : Feasible σ) (t : ℕ) :
   · rw [if_neg (by rintro ⟨-, h4⟩; omega), if_neg (by rintro ⟨-, h4⟩; omega),
       if_neg (by rintro ⟨-, h4⟩; omega)]
 
-/-! ### Extending a schedule across one time step -/
+/-! ### Extending a Schedule Across One Time Step -/
 
 open scoped Classical in
 /-- Given a feasible schedule realising `s` at time `t`, and a successor state `s'`,

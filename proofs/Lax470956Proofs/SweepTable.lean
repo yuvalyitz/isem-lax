@@ -105,7 +105,7 @@ theorem zeroLoop_spec (nm : String) (S : ℕ) (hS : S + 2 < B) :
         by simp [Env.setVar], fun c hc => by simp [Env.setVar] at hc⟩
   exact ⟨σ', hrun.mono (by omega), ⟨hI.2.1, fun c hcc => hI.2.2.2 c (by omega)⟩, hI.1⟩
 
-/-! ### The best entry -/
+/-! ### The Best Entry -/
 
 def BInv (S : ℕ) (f : ℕ → ℕ) (σ : Env) : Prop :=
   σ.vars "S" = S ∧ Tbl "V" S f σ ∧ σ.vars "c" ≤ S ∧
@@ -191,7 +191,7 @@ lemma nat_cap (a b : ℕ) : a - (a - b) = min a b := by omega
 /-- The larger of two, by truncated subtraction. -/
 lemma nat_mx (a b : ℕ) : a + (b - a) = max a b := by omega
 
-/-! ### Advancing one configuration -/
+/-! ### Advancing One Configuration -/
 
 /-- The array `pw` holds the powers of `P + 1`. -/
 def Pw (m P : ℕ) (σ : Env) : Prop :=
@@ -273,7 +273,7 @@ theorem advLoop_spec (m P δ code S : ℕ) (hS : (P + 1) ^ m ≤ S) (hcS : code 
     hI.1, hI.2.1, hI.2.2.1, hI.2.2.2.1, hI.2.2.2.2.1⟩
   rw [hI.2.2.2.2.2.2, hi]
 
-/-! ### The shift -/
+/-! ### The Shift -/
 
 /-- The configuration `c` stands for, once every machine has been free `del` longer. -/
 def advOf (P m δ c : ℕ) : ℕ := Radix.enc P m fun i => min (Radix.dig P c i + δ) P
@@ -412,7 +412,7 @@ lemma warrs_shiftLoop : ∀ x ∈ shiftLoop.warrs, x ∈ ["Vt"] := by
     Com.warrs, List.mem_append, List.mem_cons, List.not_mem_nil, or_false] at hx ⊢
   tauto
 
-/-! ### Installing the shifted table -/
+/-! ### Installing the Shifted Table -/
 
 def MInv (S : ℕ) (g : ℕ → ℕ) (σ : Env) : Prop :=
   σ.vars "S" = S ∧ Tbl "Vt" S g σ ∧ (σ.arrs "V").length = S ∧ (σ.arrs "V2").length = S ∧
@@ -517,7 +517,7 @@ lemma pushed_cases (P m δ : ℕ) (f : ℕ → ℕ) (b c' : ℕ) :
         · exact Or.inl h0
         · exact Or.inr ⟨c, by omega, he, heq⟩
 
-/-! ### Placing a job -/
+/-! ### Placing a Job -/
 
 /-- The configuration `c` with machine `i` freshly occupied. -/
 def zeroAt (P i c : ℕ) : ℕ := c - Radix.dig P c i * (P + 1) ^ i
@@ -783,7 +783,7 @@ theorem commitLoop_specG (m P S K : ℕ) (hS : (P + 1) ^ m ≤ S) (hmB : m + 2 <
     (fun c => (σ.arrs "V").getD c 0) hS hmB hdB (fun c => hbnd c) hKB σ
     ⟨hSv, hm, hP, rfl, hpw, ⟨hlenV, fun c _ => rfl⟩, hlenVt, hlenV2⟩
 
-/-! ### What the passes write -/
+/-! ### What the Passes Write -/
 
 lemma wvars_relaxLoop : relaxLoop.wvars = ["c", "u", "c2", "v", "c"] := by
   simp [relaxLoop, relaxBody, Com.wvars]

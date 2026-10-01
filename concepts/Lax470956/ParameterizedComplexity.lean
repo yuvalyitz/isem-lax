@@ -2,7 +2,7 @@ import Lax808846.RamComputes
 
 /-!
 ---
-title: Parameterized problems and fpt-reductions on a word RAM
+title: Parameterized Problems and FPT-Reductions on a Word RAM
 type: definition
 ---
 A *parameterized problem* is a set of admissible input words, a yes-instance predicate on
@@ -17,7 +17,7 @@ function of it, and is computed by one word RAM program within the same kind of 
 Fpt-reductions compose, and $Q \in \mathrm{FPT}$ together with $P \le_{\mathrm{fpt}} Q$
 gives $P \in \mathrm{FPT}$.
 
-# Formalization notes
+# Formalization Notes
 
 The parameter is read off the input word, and the program is fixed before it: the
 quantifier order puts the program and the constant before the instance, the parameter and

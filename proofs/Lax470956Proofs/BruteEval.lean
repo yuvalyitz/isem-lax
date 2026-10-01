@@ -92,7 +92,7 @@ theorem eligLoop_spec (n m Lb : ℕ) (hxg : ∀ i, x.getD i 0 + 2 < B)
   · exact hr.frame_arr a (by simp [eligLoop, eligStep, Com.warrs])
   · rw [hfiff, he]
 
-/-! ### Digits and machines -/
+/-! ### Digits and Machines -/
 
 section Digits
 
@@ -138,7 +138,7 @@ lemma mach_elig {x : List ℕ} (hEn : Enc I x) (j : Fin I.jobs) {v : ℕ} (hv : 
 
 end Digits
 
-/-! ### The context every pass runs in -/
+/-! ### The Context Every Pass Runs in -/
 
 section Context
 

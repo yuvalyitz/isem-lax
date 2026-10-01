@@ -41,7 +41,7 @@ lemma natBits_encodeNat (n : ℕ) : natBits (encodeNat n) = bitsNat n := by
   rw [bits_eq_digits, Nat.size_eq_bits_len]
   simp
 
-/-! ### The printer -/
+/-! ### The Printer -/
 
 /-- The word is long enough for the job and machine counts it declares. Every loop of the
 printer is bounded by one of the two, so it stays polynomial on a word that

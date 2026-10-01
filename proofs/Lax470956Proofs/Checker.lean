@@ -25,7 +25,7 @@ the emitter of `EmitProg` — whose five passes are reused here unchanged, throu
 specification each of them was given — or writes the fixed word a malformed input is sent
 to.
 
-# The input convention
+# The Input Convention
 
 The program is handed `|x| :: x` rather than `x`. It has to be: it reads a word of unknown
 length, and nothing in the machine tells it where the input ends, so the length has to be
@@ -279,7 +279,7 @@ lemma nine_clauseCount_lt_bnd (x : List ℕ) : 2 + 9 * clauseCount x < bnd x := 
       omega
   simp only [bnd]; omega
 
-/-! ### Reading the clause block -/
+/-! ### Reading the Clause Block -/
 
 
 lemma drop2_getD (x : List ℕ) (i : ℕ) : (x.drop 2).getD i 0 = x.getD (2 + i) 0 := by
@@ -368,7 +368,7 @@ theorem w_read (x : List ℕ) {σ : Env} (h : WInv x σ) (ht : σ.vars "t" = x.l
   · exact hcell i (by omega)
   · rw [hzero i hi, List.getD_eq_getElem?_getD, List.getElem?_eq_none hi, Option.getD_none]
 
-/-! ### Splitting off the header -/
+/-! ### Splitting Off the Header -/
 
 /-- The state of the loop that copies the clause block. -/
 def AInv (x : List ℕ) (σ : Env) : Prop :=
@@ -512,7 +512,7 @@ lemma seen_update {x : List ℕ} {l : List ℕ} {n m : ℕ}
       · exact ⟨i', h, hk⟩
       · exact absurd (by rw [← hk, show i' = n by omega, ← hm]) he
 
-/-! ### The marking pass -/
+/-! ### The Marking Pass -/
 
 /-- What the pass has established about the first `n` slots. -/
 def Tally (x : List ℕ) (n : ℕ) (σ : Env) : Prop :=
@@ -884,7 +884,7 @@ theorem checkHead_spec (x : List ℕ) :
     | assumption
     | omega
 
-/-! ### The decision, assembled -/
+/-! ### The Decision, Assembled -/
 
 /-- What the whole decision leaves behind. -/
 def Final (x : List ℕ) (σ : Env) : Prop :=
@@ -1009,7 +1009,7 @@ theorem checker_spec_lin (x : List ℕ) :
     | assumption
     | omega
 
-/-! ### The two branches -/
+/-! ### The Two Branches -/
 
 theorem noPart_spec (x : List ℕ) :
     Spec (bnd x) (fun σ => σ.out = []) noPart (fun _ σ' => σ'.out = noWord) 21 := by
@@ -1051,7 +1051,7 @@ theorem emitPart_spec (x : List ℕ) (hwf : WellFormed x) :
   · rintro σ ⟨h1, h2, h3, h4⟩
     exact ⟨h1, h2, h3, h4, small_lt_bnd x hwf⟩
 
-/-! ### The two branches, chosen -/
+/-! ### The Two Branches, Chosen -/
 
 lemma emitPartR_spec (x : List ℕ) (hwf : WellFormed x) :
     Spec (bnd x) (Final x) emitPart (fun _ σ' => σ'.out = reduce x)
@@ -1113,7 +1113,7 @@ theorem com_spec (x : List ℕ) :
     | assumption
     | omega
 
-/-! ### From IMP+ to the machine -/
+/-! ### From IMP+ to the Machine -/
 
 /-- The physical inputs the program is written for: a word preceded by its length. -/
 def Shape : Set (List ℕ) := {y | y ≠ [] ∧ y.headD 0 = y.tail.length}
@@ -1283,7 +1283,7 @@ lemma reduce_lt_bnd (x : List ℕ) {v : ℕ} (hv : v ∈ reduce x) : v < bnd x :
     simp only [noWord, List.mem_cons, List.not_mem_nil, or_false] at hv
     rcases hv with rfl | rfl | rfl | rfl | rfl | rfl | rfl <;> omega
 
-/-! ### Polynomial time, in the bit-size currency -/
+/-! ### Polynomial Time, in the Bit-Size Currency -/
 
 open Lax759944.BinaryWordEncoding Lax759944.RamPolytime Lax759944Proofs.Encoding
 

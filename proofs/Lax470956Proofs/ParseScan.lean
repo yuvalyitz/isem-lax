@@ -258,7 +258,7 @@ theorem dispatch_spec (s : St) (b : Bool) (M : ℕ) (hM : M + 8 < B) (hs : size 
       (by simpa [step, Env.setVar] using hn) (by simpa [step, Env.setVar] using hh)
       (by simpa [step, Env.setVar] using hC), hl1, hl2⟩
 
-/-! ### The loop -/
+/-! ### The Loop -/
 
 variable {y : List ℕ}
 

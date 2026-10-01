@@ -20,7 +20,7 @@ open Lax470956.DynamicProgram Lax470956.Preprocessing
 
 variable {I : Instance}
 
-/-! ### The time a machine becomes free -/
+/-! ### The Time a Machine Becomes Free -/
 
 /-- The time at which machine `i` becomes free under `σ`: the last deadline of a job
 placed on it, and `0` if there is none. -/
@@ -62,7 +62,7 @@ lemma freeAt_update_self {σ : I.Schedule} {j : Fin I.jobs} {i : Fin I.machines}
     exact le_freeAt (by rw [Function.update_of_ne hkj]; exact hk')
   · exact le_freeAt (by simp)
 
-/-! ### The sweep -/
+/-! ### The Sweep -/
 
 /-- A configuration: for every machine, how long it has been free, capped at `P`. -/
 abbrev St (I : Instance) : Type := Fin I.machines → ℕ
@@ -108,7 +108,7 @@ lemma match_adv {P t : ℕ} {u : St I} {σ₀ : I.Schedule} (h : Match P t u σ�
     simp only [adv, h2]
     omega
 
-/-! ### Placing one more job -/
+/-! ### Placing One More Job -/
 
 lemma feasible_update {σ : I.Schedule} {j : Fin I.jobs} {i : Fin I.machines}
     (hf : Feasible σ) (hj : σ j = none) (hi : i ∈ I.eligible j)
@@ -167,7 +167,7 @@ lemma free_iff {P t : ℕ} {u : St I} {σ₀ : I.Schedule} (h : Match P t u σ�
   rw [h1, hstart]
   omega
 
-/-! ### The sweep is sound -/
+/-! ### The Sweep Is Sound -/
 
 theorem reach_sound {P : ℕ} (hP : ∀ j, I.p j ≤ P) {t : ℕ} {u : St I}
     {L : List (Fin I.jobs)} {u' : St I} {v : ℕ} (hR : Reach I P t u L u' v) :
@@ -220,7 +220,7 @@ theorem reach_sound {P : ℕ} (hP : ∀ j, I.p j ≤ P) {t : ℕ} {u : St I}
           Function.update_of_ne (fun hc : j' = j => hj' (hc ▸ List.mem_cons_self))]
       · rw [hw, hσ₁, weight_update hjn]; omega
 
-/-! ### The sweep is complete -/
+/-! ### The Sweep Is Complete -/
 
 @[simp] def wOn_nil (σ : I.Schedule) : wOn σ ([] : List (Fin I.jobs)) = 0 := rfl
 
@@ -298,7 +298,7 @@ theorem reach_complete {P : ℕ} (hP : ∀ j, I.p j ≤ P) :
         rw [this]
         exact Reach.place i hi hfree hR
 
-/-! ### The sweep computes the optimum of its list -/
+/-! ### The Sweep Computes the Optimum of Its List -/
 
 @[simp] lemma weight_none : weight (fun _ => none : I.Schedule) = 0 := by simp [weight]
 
@@ -364,7 +364,7 @@ theorem exists_reach {P : ℕ} (hP : ∀ j, I.p j ≤ P) {L : List (Fin I.jobs)}
   rw [← hw, weight_eq_wOn hnd hnone]
   exact ⟨u', hR⟩
 
-/-! ### Jobs that cannot interact are solved separately -/
+/-! ### Jobs That Cannot Interact Are Solved Separately -/
 
 lemma feasible_of_pointwise {σ σ' : I.Schedule} (hf : Feasible σ)
     (h : ∀ j, σ' j = σ j ∨ σ' j = none) : Feasible σ' := by

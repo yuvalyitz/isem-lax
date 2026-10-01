@@ -14,7 +14,7 @@ abbrev add (e f : Expr) : Expr := .bin .add e f
 abbrev sub (e f : Expr) : Expr := .bin .sub e f
 abbrev mul (e f : Expr) : Expr := .bin .mul e f
 
-/-! ### A block of numbers -/
+/-! ### A Block of Numbers -/
 
 /-- Write entry `b + j` of the word, and move on. -/
 def numBody : Com :=
@@ -99,7 +99,7 @@ theorem numLoop_spec {S : ℕ} (hs : Small B S y) (b0 J0 : ℕ) (out0 : List ℕ
   Spec.forRangeZero "j" "J" (NInv y b0 J0 out0) J0 (48 * S + 60) (by have := hs.len; omega)
     (fun _ h => h.2.2.2.1) (fun _ h => h.2.2.1) (numBody_spec hs b0 J0 out0 hb)
 
-/-! ### One cell of the eligibility matrix -/
+/-! ### One Cell of the Eligibility Matrix -/
 
 open Lax470956.InstanceEncoding
 
@@ -276,7 +276,7 @@ theorem cell_spec {S : ℕ} (hs : Small B S y) (hg : Guard y) (j0 : ℕ) (out0 :
     | (rw [hf', ← seen_room]; omega)
     | (simp [hi2]; omega)
 
-/-! ### A row, and the matrix -/
+/-! ### A Row, and the Matrix -/
 
 def iLoop : Com := .seq (.assign "i" (.lit 0)) (.while (.lt (V "i") (V "M")) cell)
 

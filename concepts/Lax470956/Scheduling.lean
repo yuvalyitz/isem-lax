@@ -3,7 +3,7 @@ import Mathlib.Data.Finset.Lattice.Fold
 
 /-!
 ---
-title: Interval scheduling with eligible machine sets
+title: Interval Scheduling with Eligible Machine Sets
 type: definition
 ---
 An instance consists of $n$ jobs and $m$ identical parallel machines. Job $j$ has
@@ -17,7 +17,7 @@ if no machine is assigned two jobs whose intervals overlap. Its weight is the to
 weight of the jobs it schedules. The optimization problem asks for a feasible schedule
 of maximum weight; the decision problem asks whether weight $W$ is attainable.
 
-# Formalization notes
+# Formalization Notes
 
 Jobs and machines are `Fin n` and `Fin m` rather than abstract finite types. The
 difference matters: an instance is something a machine is handed as a word, and a word

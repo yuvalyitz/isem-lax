@@ -18,7 +18,7 @@ namespace Lax470956Proofs.BruteProg
 open Lax808846Proofs.Imp Lax808846Proofs.Compile Lax808846Proofs.Reasoning
 open Lax470956Proofs.SweepProg
 
-/-! ### Eligibility: is machine `va - 1` among the targets of job `j`? -/
+/-! ### Eligibility: Is Machine `va - 1` Among the Targets of Job `j`? -/
 
 /-- One target of the job's block: does it name the machine the digit says? -/
 def eligStep : Com :=
@@ -54,7 +54,7 @@ def jobFold : Com :=
 /-- One job. -/
 def jobStep2 : Com := .seq jobFetch (.seq eligLoop jobFold)
 
-/-! ### Clashes: two overlapping jobs on one machine -/
+/-! ### Clashes: Two Overlapping Jobs on One Machine -/
 
 /-- `1` when the digits agree, `0` otherwise. -/
 abbrev eqFlag (e f : Expr) : Expr :=
@@ -99,7 +99,7 @@ and `acc` holds its weight, capped at `W`. -/
 def evalOne : Com :=
   .seq (set "ok" (lit 1)) (.seq (set "acc" (lit 0)) (.seq jobsLoop pairsLoop))
 
-/-! ### The odometer -/
+/-! ### The Odometer -/
 
 /-- One digit of the advance: add the carry; if the sum passes `m` the digit wraps to zero
 and the carry moves on, otherwise the digit is the sum and the carry is spent. -/

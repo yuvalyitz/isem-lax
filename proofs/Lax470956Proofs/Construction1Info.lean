@@ -16,7 +16,7 @@ open Lax470956Proofs.Construction1Ctx
 
 variable {x : List ℕ} {G : Instance}
 
-/-! ### The tables, read as the construction's own accessors -/
+/-! ### The Tables, Read as the Construction's Own Accessors -/
 
 lemma colr_eq_col (hR : Reads x G) {v : ℕ} (hv : v < G.vertices) :
     colr x v = col (G := G) v := by
@@ -86,7 +86,7 @@ lemma edge_read (hR : Reads x G) {σ : Env} (h : EDone x σ) {q : ℕ} (hq : q <
   · rw [ejU, List.getElem?_eq_getElem hq]; simp
   · rw [ejV, List.getElem?_eq_getElem hq]; simp
 
-/-! ### Vertex jobs -/
+/-! ### Vertex Jobs -/
 
 /-- What a pass keeps while it looks a job up. -/
 def Fr (σ σ' : Env) : Prop :=
@@ -217,7 +217,7 @@ theorem vBody_spec (hR : Reads x G) :
       · exact h
     exact ⟨hv', big hR, (Nat.div_lt_iff_lt_mul hpos).mpr hj, Nat.mod_lt _ hpos⟩
 
-/-! ### Colour combination slots -/
+/-! ### Colour Combination Slots -/
 
 /-- The state between a combination slot's decoding and its numbers. -/
 def CDec (x : List ℕ) (G : Instance) (σ : Env) : Prop :=
@@ -400,7 +400,7 @@ theorem cBody_spec (hR : Reads x G) :
       rw [show G.colours * (G.vertices * G.colours) = G.colours * G.colours * G.vertices by ring]
       exact hq)
 
-/-! ### Edge jobs -/
+/-! ### Edge Jobs -/
 
 /-- The state between an edge job's loading and its numbers. -/
 def EDec (x : List ℕ) (G : Instance) (σ : Env) : Prop :=
@@ -509,7 +509,7 @@ theorem eTail_spec (hR : Reads x G) :
     obtain ⟨-, hj1, hj2, -⟩ := he
     exact ⟨he', big hR, by simp only [nJobs] at hj2; omega⟩
 
-/-! ### The clamp -/
+/-! ### The Clamp -/
 
 /-- The raw times of a job stay below the bound. -/
 lemma raw_lt (hR : Reads x G) {j : ℕ} (hj : j < nJobs G) :
@@ -574,7 +574,7 @@ theorem clamp_spec (hR : Reads x G) :
     have hsm := (big hR).small
     exact ⟨hctx, hraw, by rw [hraw.1]; exact h1, by rw [hraw.2.1]; exact h2, by omega⟩
 
-/-! ### Everything about job `j` -/
+/-! ### Everything About Job `j` -/
 
 theorem info_spec (hR : Reads x G) :
     Spec (bnd x G) (fun σ => Ctx x G σ ∧ σ.vars "j" < nJobs G) info

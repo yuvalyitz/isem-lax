@@ -19,7 +19,7 @@ namespace Lax470956Proofs.Construction1Slots
 
 open Lax470956.Construction1 Lax470956.Scheduling
 
-/-! ### Division facts -/
+/-! ### Division Facts -/
 
 lemma div_add_of_lt {a b c : ℕ} (hc : c < b) : (a * b + c) / b = a := by
   have hb : 0 < b := Nat.lt_of_le_of_lt (Nat.zero_le c) hc
@@ -38,7 +38,7 @@ lemma pair_lt {a b A B : ℕ} (ha : a < A) (hb : b < B) : a * B + b < A * B := b
 
 variable (G : Lax470956.MulticolouredClique.Instance)
 
-/-! ### The three encodings -/
+/-! ### The Three Encodings -/
 
 /-- The slot of the vertex job of vertex `v` for colour `ℓ`. -/
 def vIdx (v l : ℕ) : ℕ := v * G.colours + l
@@ -51,7 +51,7 @@ noncomputable def eIdx (q : ℕ) : ℕ := nVJob G + nCJob G + q
 
 variable {G}
 
-/-! ### Each block lies where it should -/
+/-! ### Each Block Lies Where It Should -/
 
 lemma vIdx_lt {v l : ℕ} (hv : v < G.vertices) (hl : l < G.colours) :
     vIdx G v l < nVJob G := pair_lt hv hl
@@ -71,7 +71,7 @@ lemma eIdx_mem {q : ℕ} (hq : q < nEJob G) :
   simp only [eIdx, nJobs]
   omega
 
-/-! ### Decoding inverts encoding -/
+/-! ### Decoding Inverts Encoding -/
 
 @[simp] lemma vjVert_vIdx {v l : ℕ} (hl : l < G.colours) : vjVert G (vIdx G v l) = v :=
   div_add_of_lt hl
@@ -101,7 +101,7 @@ lemma cIdx_sub {a b z : ℕ} : cIdx G a b z - nVJob G = (a * G.colours + b) * G.
 @[simp] lemma eIdx_sub {q : ℕ} : eIdx G q - nVJob G - nCJob G = q := by
   simp only [eIdx]; omega
 
-/-! ### Inadmissible slots carry inert jobs -/
+/-! ### Inadmissible Slots Carry Inert Jobs -/
 
 open Classical in
 /-- A colour combination slot whose pair is unordered, or whose vertex has neither of its

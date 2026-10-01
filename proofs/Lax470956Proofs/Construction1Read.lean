@@ -13,7 +13,7 @@ open Lax470956Proofs.Construction1Shape Lax470956Proofs.Construction1Prog
 
 variable {x : List ℕ} {G : Instance}
 
-/-! ### The word -/
+/-! ### The Word -/
 
 /-- The part of the word the program copies: everything after the two counts. -/
 def body (x : List ℕ) : List ℕ := x.drop 2
@@ -41,7 +41,7 @@ lemma head_shape (hR : Reads x G) : x = vn x :: ve x :: body x := by
   · simp at hlen; omega
   · rfl
 
-/-! ### The bound on the values -/
+/-! ### The Bound on the Values -/
 
 /-- Every number the program forms is below this: an entry of the word or a count of
 them, or an entry of the word it emits or a count of those. -/
@@ -108,7 +108,7 @@ lemma master (hR : Reads x G) :
 lemma nk_le_nJobs (hR : Reads x G) : vn x * kk x ≤ nJobs G := by
   rw [hR.vn_eq, hR.kk_eq]; simp only [nJobs, nVJob]; omega
 
-/-! ### The copy loop -/
+/-! ### The Copy Loop -/
 
 /-- The lengths of the three tables the program fills later. -/
 def Tables (x : List ℕ) (σ : Env) : Prop :=

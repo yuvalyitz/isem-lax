@@ -122,7 +122,7 @@ theorem wtBody_spec (hR : Reads x G) (out0 : List ℕ) :
   all_goals try simp [hj', hWt]
   all_goals try omega
 
-/-! ### The three scalar passes, as loops -/
+/-! ### The Three Scalar Passes, as Loops -/
 
 lemma nJ_of_ctx {σ : Env} (h : Ctx x G σ) : σ.vars "nJ" = nJobs G :=
   h.2.2.2.2.2.2.2.2.2.2.1
@@ -160,7 +160,7 @@ theorem wtLoop_spec (hR : Reads x G) (out0 : List ℕ) :
     (by have := nJ_lt_bnd hR; omega) (fun _ h => h.2.1) (fun _ h => nJ_of_ctx h.1)
     (wtBody_spec hR out0)
 
-/-! ### The offset pass -/
+/-! ### The Offset Pass -/
 
 lemma elig_len_le (G : Instance) (j : ℕ) : (eligOf G j).length ≤ 2 := by
   classical
@@ -238,7 +238,7 @@ theorem offLoop_spec (hR : Reads x G) (out0 : List ℕ) :
     (by have := (big hR).small; omega) (fun _ h => h.2.1) (fun _ h => N_of_ctx h.1)
     (offBody_spec hR out0)
 
-/-! ### The target pass -/
+/-! ### The Target Pass -/
 
 lemma flatMap_range_succ (g : ℕ → List ℕ) (j : ℕ) :
     (List.range (j + 1)).flatMap g = (List.range j).flatMap g ++ g j := by

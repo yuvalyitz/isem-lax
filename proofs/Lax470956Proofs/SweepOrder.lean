@@ -21,7 +21,7 @@ open Lax470956Proofs.SweepPre
 
 variable {B : ℕ} {x : List ℕ} {n P M Lo : ℕ} {occ : ℕ → Bool}
 
-/-! ### The list of jobs at one deadline -/
+/-! ### The List of Jobs at One Deadline -/
 
 lemma jlist_tail {f : ℕ → ℕ} {d : ℕ} : ∀ N a l, jlist f d N = a :: l → l = jlist f d a := by
   intro N
@@ -47,7 +47,7 @@ lemma jlist_head {f : ℕ → ℕ} {d N : ℕ} (h : hd1 (jlist f d N) ≠ 0) :
     simp only [hd1, Nat.add_sub_cancel]
     rw [← hjt]
 
-/-! ### Which block a position belongs to -/
+/-! ### Which Block a Position Belongs to -/
 
 /-- How many block starts there are up to and including `k`. -/
 def blkA (σ : Env) (k : ℕ) : ℕ := ∑ t ∈ Finset.range (k + 1), (σ.arrs "nc").getD t 0
@@ -76,7 +76,7 @@ lemma blkA_congr {σ σ' : Env} {k : ℕ}
   have := Finset.mem_range.mp ht
   omega
 
-/-! ### What the pass reads and what it has built -/
+/-! ### What the Pass Reads and What It Has Built -/
 
 /-- The arrays the four earlier passes left behind. -/
 structure Src (x : List ℕ) (n P Lo : ℕ) (σ : Env) : Prop where
@@ -131,7 +131,7 @@ from `r` up. -/
 def EmAt (x : List ℕ) (Dn : ℕ → Prop) (cur r : ℕ) : ℕ → Prop :=
   fun j => Dn (due x j) ∨ (due x j = cur ∧ r ≤ j)
 
-/-! ### Writing out one job -/
+/-! ### Writing Out One Job -/
 
 variable {Dn : ℕ → Prop} {s r : ℕ}
 
@@ -364,7 +364,7 @@ theorem emitStep_spec (M : ℕ) (hn : n + 2 < B) (cur : ℕ)
         · exact Or.inl h
       · exact absurd (show a' = b' from by omega) (by rintro rfl; exact hne rfl)
 
-/-! ### Writing out every job of one deadline -/
+/-! ### Writing Out Every Job of One Deadline -/
 
 lemma evalB_lt0 {σ : Env} {y : String} (h0 : 0 < B) (h : σ.vars y < B) :
     (Cond.lt (lit 0) (V y)).evalB B σ = some (decide (0 < σ.vars y)) := by
@@ -514,7 +514,7 @@ theorem emitLoop_run (M : ℕ) (hn : n + 2 < B) (cur : ℕ) (hcB : cur + 2 < B)
     simp only [Cond.size, Expr.size] at hpay
     omega
 
-/-! ### Walking one block -/
+/-! ### Walking One Block -/
 
 lemma chain_nodup {P M : ℕ} {occ : ℕ → Bool} (d : ℕ) : (chain P occ M d).Nodup :=
   (chain_sorted (P := P) (occ := occ) (M := M) d).imp (fun h => Nat.ne_of_lt h)
@@ -702,7 +702,7 @@ theorem blockLoop_run (hM : ∀ e, occB x n e = true → e ≤ M) (hn : n + 2 < 
     simp only [Cond.size, Expr.size] at hpay
     omega
 
-/-! ### Opening the blocks -/
+/-! ### Opening the Blocks -/
 
 lemma hd1_eq_succ {f : ℕ → ℕ} {d N h : ℕ} (he : hd1 (jlist f d N) = h + 1) :
     f h = d ∧ h < N := by
@@ -906,7 +906,7 @@ theorem openStep_run (hM : ∀ e, occB x n e = true → e ≤ M)
       · simp only [Psi2, hσ1, Env.setVar, String.reduceEq, ↓reduceIte]
         omega
 
-/-! ### The pass -/
+/-! ### The Pass -/
 
 /-- The potential the outer loop runs on. -/
 def PhiO (n : ℕ) (σ : Env) : ℕ := Psi2 n σ + 37 * (n - σ.vars "hp")
@@ -991,7 +991,7 @@ theorem orderLoop_run (hM : ∀ e, occB x n e = true → e ≤ M)
   simp only [Cond.size, Expr.size] at hpay
   omega
 
-/-! ### The contract the sweep asks for -/
+/-! ### The Contract the Sweep Asks for -/
 
 lemma nc_conv {v : ℕ} (h : v ≤ 1) : v = if decide (v = 1) then 1 else 0 := by
   interval_cases v <;> simp

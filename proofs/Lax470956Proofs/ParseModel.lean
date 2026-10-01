@@ -45,7 +45,7 @@ def run (s : St) (w : Word) : St := w.foldl step s
 lemma run_append (s : St) (u v : Word) : run s (u ++ v) = run (run s u) v := by
   simp [run, List.foldl_append]
 
-/-! ### What an accepting scan has read -/
+/-! ### What an Accepting Scan Has Read -/
 
 lemma encodeList_eq {α : Type} (e : α → Word) (l : List α) :
     encodeList e l = l.flatMap (fun a => true :: e a) ++ [false] := by
@@ -138,7 +138,7 @@ theorem accept_sound {w : Word} (h : (run init w).ph = 4) :
     simp [consumed, h, encodeCNF, encodeList_eq, doneBits]
   rw [← this, hc]
 
-/-! ### What the scan accepts -/
+/-! ### What the Scan Accepts -/
 
 lemma run_ones (n0 m : ℕ) (d : List Clause) (c : Clause) (w : Word) :
     run ⟨2, n0, d, c⟩ (List.replicate m true ++ w) = run ⟨2, n0 + m, d, c⟩ w := by

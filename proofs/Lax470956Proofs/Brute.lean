@@ -23,7 +23,7 @@ open Lax470956.Scheduling Lax470956.Scheduling.Instance
 
 variable {I : Instance}
 
-/-! ### A digit as a machine choice -/
+/-! ### A Digit as a Machine Choice -/
 
 /-- What digit `v` says: `0` rejects the job, `i + 1` puts it on machine `i`. A digit
 out of range rejects, so the function is total. -/
@@ -52,7 +52,7 @@ lemma mach_digOf (σ : I.Schedule) (j : Fin I.jobs) : mach I (digOf σ j.val) = 
     rw [mach, dif_pos hk]
     exact congrArg some (Fin.ext (by simp))
 
-/-! ### A number as a schedule -/
+/-! ### A Number as a Schedule -/
 
 /-- The schedule the number `s` reads off, in base `m + 1`. -/
 def schedOf (I : Instance) (s : ℕ) : I.Schedule :=
@@ -68,7 +68,7 @@ lemma schedOf_encOf (σ : I.Schedule) : schedOf I (encOf σ) = σ := by
   funext j
   rw [schedOf, encOf, Radix.dig_enc (digOf_le σ) j.val j.isLt, mach_digOf]
 
-/-! ### Feasibility as two scans -/
+/-! ### Feasibility as Two Scans -/
 
 lemma overlap_symm {j j' : Fin I.jobs} (h : I.Overlap j j') : I.Overlap j' j := ⟨h.2, h.1⟩
 
@@ -90,7 +90,7 @@ lemma feasible_iff (σ : I.Schedule) :
     · intro hj'
       exact hc j' j h (overlap_symm hov) i hj' hj
 
-/-! ### The weight, capped -/
+/-! ### The Weight, Capped -/
 
 /-- The weight of the first `k` jobs. -/
 def wpart (I : Instance) (σ : I.Schedule) (k : ℕ) : ℕ :=
@@ -122,7 +122,7 @@ lemma wacc_eq (σ : I.Schedule) (W : ℕ) : ∀ k, wacc I σ W k = min (wpart I 
 lemma le_weight_iff (σ : I.Schedule) (W : ℕ) : W ≤ weight σ ↔ wacc I σ W I.jobs = W := by
   rw [wacc_eq, wpart_jobs]; omega
 
-/-! ### What the enumeration has to find -/
+/-! ### What the Enumeration Has to Find -/
 
 /-- **The brute force is correct**: the instance has a feasible schedule of weight at
 least `W` exactly when one of the numbers below `(m + 1) ^ n` reads one off. -/

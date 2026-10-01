@@ -20,8 +20,9 @@ variable — whose NP-hardness (Tovey 1984) is proved in the archive submission 
 
 **Theorem 3.** For the combined parameter $m + p_{\max}$ the problem is fixed-parameter
 tractable: a dynamic program over machine occupancy, run on the word RAM, decides it
-within $c\,(m\,p_{\max}+1)^{2m}\,(m+1)\,(|x|+1)$ instructions, and the result is also
-stated in the qualitative form FPT. Together with the first two theorems, the combined
+within $c\,(m\,p_{\max}+1)^{2m}\,(m+1)\,(|x|+1)$ instructions when the input and
+configuration table fit in the machine address space. A separate FPT theorem covers all
+admissible inputs, using exhaustive search when the table cannot be addressed. Together with the first two theorems, the combined
 parameter is tractable and neither half of it is.
 
 Running times are stated on the word RAM of the archive, against an explicit word encoding

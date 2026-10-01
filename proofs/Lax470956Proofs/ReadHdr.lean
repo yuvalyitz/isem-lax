@@ -26,7 +26,7 @@ abbrev set (s : String) (e : Expr) : Com := .assign s e
 
 variable {B : ℕ} {y : List ℕ}
 
-/-! ### Evaluating an expression -/
+/-! ### Evaluating an Expression -/
 
 lemma evalB_lit {σ : Env} {v : ℕ} (h : v < B) : (lit v).evalB B σ = some v := fit_self h
 
@@ -127,7 +127,7 @@ theorem readUpTo_spec (L : ℕ) (hL : L ≤ y.length) (hy : ∀ v ∈ y, v < B)
       exact le_trans (Nat.add_le_add_right
         (Nat.mul_le_mul_left _ (Nat.sub_le _ _)) 4) (by omega))
 
-/-! ### Reading a scheduling word -/
+/-! ### Reading a Scheduling Word -/
 
 /-- Read the two header entries, then the three arrays and the offsets, then the target
 array and the threshold. -/

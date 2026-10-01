@@ -111,7 +111,7 @@ theorem sizeLoop_spec (n : ℕ) (hB : n + 4 < B) :
   all_goals try omega
   all_goals try assumption
 
-/-! ### The unary length -/
+/-! ### The Unary Length -/
 
 def OInv (n : ℕ) (out0 : List ℕ) (σ : Env) : Prop :=
   σ.vars "v" = n ∧ σ.vars "s" = n.size ∧ σ.vars "i2" ≤ n.size ∧
@@ -133,7 +133,7 @@ theorem onesLoop_spec (n : ℕ) (out0 : List ℕ) (hB : n + 4 < B) :
     (by have : n.size ≤ n := Nat.size_le.mpr Nat.lt_two_pow_self; omega)
     (fun _ h => h.2.2.1) (fun _ h => h.2.1) (onesBody_spec n out0 hB)
 
-/-! ### The digits -/
+/-! ### The Digits -/
 
 def DInv (n : ℕ) (out0 : List ℕ) (σ : Env) : Prop :=
   σ.vars "v" = n ∧ σ.vars "s" = n.size ∧ σ.vars "i2" ≤ n.size ∧
@@ -169,7 +169,7 @@ theorem digWhile_spec (n : ℕ) (out0 : List ℕ) (hB : n + 4 < B) :
     (by have : n.size ≤ n := Nat.size_le.mpr Nat.lt_two_pow_self; omega)
     (fun _ h => h.2.2.1) (fun _ h => h.2.1) (digBody_spec n out0 hB)
 
-/-! ### The whole number -/
+/-! ### The Whole Number -/
 
 theorem emitNat_ghost (n : ℕ) (out0 : List ℕ) (hB : n + 4 < B) :
     Spec B (fun σ => σ.vars "v" = n ∧ σ.out = out0) emitNat

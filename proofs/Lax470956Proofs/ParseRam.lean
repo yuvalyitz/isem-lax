@@ -78,7 +78,7 @@ theorem prog_computesInTime (w : ℕ) :
     omega
   · rw [const_eq]
 
-/-! ### Polynomial time, in the bit-size currency -/
+/-! ### Polynomial Time, in the Bit-Size Currency -/
 
 open Lax759944.BinaryWordEncoding Lax759944.RamPolytime Lax759944Proofs.Encoding
 

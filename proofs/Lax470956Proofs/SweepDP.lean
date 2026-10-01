@@ -70,7 +70,7 @@ lemma zeroAt_codeOf (i : Fin I.machines) {u : St I} (hu : ∀ k, u k ≤ P) :
   rw [Radix.enc_congr hup,
     Radix.enc_update_zero (fun k hk => by rw [dif_pos hk]; exact hu _) i.isLt, dif_pos i.isLt]
 
-/-! ### One job of the sweep -/
+/-! ### One Job of the Sweep -/
 
 /-- The sweep's move on one job, from reference `t`. -/
 inductive Step1 (I : Instance) (P : ℕ) (t : ℕ) (u : St I) (j : Fin I.jobs) : St I → ℕ → Prop
@@ -141,7 +141,7 @@ lemma reach_snoc_iff {t : ℕ} {u : St I} {L : List (Fin I.jobs)} {j : Fin I.job
         obtain ⟨u1, w1, w2, hs, hr1, rfl⟩ := reach_cons_iff.mp hrc
         exact ⟨u1, w1, w2 + v2, hs, ih.mpr ⟨u', w2, v2, hr1, hs2, rfl⟩, by omega⟩
 
-/-! ### What the table holds -/
+/-! ### What the Table Holds -/
 
 lemma adv_adv (P a b : ℕ) (u : St I) : adv P a (adv P b u) = adv P (a + b) u := by
   funext i; simp only [adv]; omega
@@ -242,7 +242,7 @@ lemma tab_shift {C : ℕ} {L : List (Fin I.jobs)} {t t' : ℕ} {T : ℕ → ℕ}
       rw [heq, hkc] at *
       exact hle
 
-/-! ### Placing a job -/
+/-! ### Placing a Job -/
 
 lemma reachAt_snoc {L : List (Fin I.jobs)} {j : Fin I.jobs} {u : St I} {v : ℕ} :
     ReachAt I P (L ++ [j]) (I.d j) u v ↔
@@ -427,7 +427,7 @@ lemma tab_job' {C : ℕ} {L : List (Fin I.jobs)} {j : Fin I.jobs} {T : ℕ → �
     · exact reachAt_snoc.mpr (Or.inl ⟨u, v, hRA, rfl, rfl⟩)
     · exact reachAt_snoc.mpr (Or.inr ⟨u', v', i, hRA, hi, hfree, rfl, rfl⟩)
 
-/-! ### Reading the answer off the table -/
+/-! ### Reading the Answer Off the Table -/
 
 open Lax470956.Preprocessing in
 /-- **The best entry of the table is the block's optimum**, capped. -/

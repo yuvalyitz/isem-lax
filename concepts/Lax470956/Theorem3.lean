@@ -2,15 +2,15 @@ import Lax470956.SchedulingProblems
 
 /-!
 ---
-title: Interval scheduling is fixed-parameter tractable for the machines and the largest processing time
+title: Interval Scheduling Is Fixed-Parameter Tractable for the Machines and the Largest Processing Time
 type: theorem
 ---
 Interval scheduling with eligible machine sets is fixed-parameter tractable for the
 combined parameter $m + p_{\max}$. There are one word RAM program and one constant $c$
-such that, at every word length, on every decision instance whose encoding fits into
-words, the program halts within
+such that, at every word length admitting the input and the configuration table,
+the program halts within
 $$c \cdot (m \cdot p_{\max} + 1)^{2m} \cdot (m+1) \cdot (|x|+1)$$
-instructions and writes $1$ if a feasible schedule of weight $W$ exists and $0$ if none
+instructions and writes $1$ if a feasible schedule of weight at least $W$ exists and $0$ if none
 does.
 
 The algorithm sweeps the time axis. At each point it records, for every machine, how much
@@ -24,7 +24,7 @@ alone unless $\mathrm{W}[1] = \mathrm{FPT}$, and the second, which rules it out 
 $p_{\max}$ alone unless $\mathrm{P} = \mathrm{NP}$, this locates the problem: the
 combined parameter is tractable and neither half of it is.
 
-# Formalization notes
+# Formalization Notes
 
 Two statements are made. The first gives the running time explicitly, with the dependence on
 the parameter written out, for the words that leave room for the algorithm's table. The second

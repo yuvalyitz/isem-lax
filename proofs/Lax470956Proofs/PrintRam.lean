@@ -59,7 +59,7 @@ theorem com_spec (y : List ℕ) :
     have hk : 12 * y.length + 10 + 40 ≤ Kc y := by unfold Kc; rw [if_neg hg]; omega
     exact ⟨σ2, (Run.seq hrun1 hrun2).mono hk, h2⟩
 
-/-! ### The machine program -/
+/-! ### The Machine Program -/
 
 theorem solves : Solves layout com Shape (fun y => print y.tail) (fun y => bnd y.tail)
     (fun y => Kc y.tail) where
@@ -108,7 +108,7 @@ theorem prog_computesInTime (w : ℕ) :
     omega
   · rw [const_eq]
 
-/-! ### Polynomial time, in the bit-size currency -/
+/-! ### Polynomial Time, in the Bit-Size Currency -/
 
 open Lax759944.BinaryWordEncoding Lax759944.RamPolytime Lax759944Proofs.Encoding
 

@@ -47,7 +47,7 @@ theorem Ctx.setVar {σ : Env} (h : Ctx x G σ) (y : String) (v : ℕ) (hy : y �
     Ne.symm h11, Ne.symm h12, Ne.symm h13, Ne.symm h14, Ne.symm h15, Ne.symm h16,
     Ne.symm h17, Ne.symm h18] using h
 
-/-! ### The header -/
+/-! ### The Header -/
 
 /-- What the tables leave behind. -/
 def H0 (x : List ℕ) (σ : Env) : Prop := Base x σ ∧ σ.out = [] ∧ Ranked x σ ∧ EDone x σ

@@ -84,7 +84,7 @@ theorem solves2 (w : ℕ) :
       · rw [if_pos hc, if_pos (hyes.mpr hc)]
       · rw [if_neg hc, if_neg (fun h => hc (hyes.mp h))]
 
-/-! ### The function of the parameter -/
+/-! ### The Function of the Parameter -/
 
 /-- The size of the table, bounded by the parameter alone. -/
 def Tof (k : ℕ) : ℕ := (k + 1) ^ k

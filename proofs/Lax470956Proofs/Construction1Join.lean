@@ -20,7 +20,7 @@ open Lax470956Proofs.Construction1Typed.Construction1
 
 variable (G : Lax470956.MulticolouredClique.Instance)
 
-/-! ### The instance shape -/
+/-! ### The Instance Shape -/
 
 /-- The paper's Multicoloured Clique instance, built from the archive's. -/
 noncomputable def ofInstance : MCCInstance G.colours where

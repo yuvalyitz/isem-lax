@@ -95,7 +95,7 @@ lemma flatMap_range_length (N : ℕ) : ((List.range N).flatMap S.elig).length = 
 @[simp] lemma tgtBlock_length : (tgtBlock S).length = offOf S S.jobs :=
   flatMap_range_length S S.jobs
 
-/-! ### Reading the word -/
+/-! ### Reading the Word -/
 
 lemma getD_skip (A B : List ℕ) (i : ℕ) :
     (A ++ B).getD (A.length + i) 0 = B.getD i 0 := by
@@ -172,7 +172,7 @@ lemma target_emit {t : ℕ} : target (emit S) t = (tgtBlock S).getD t 0 := by
     getD_skip,
     show (S.jobs + 1) + t = (offBlock S).length + t by simp, getD_skip]
 
-/-! ### The eligibility slice -/
+/-! ### The Eligibility Slice -/
 
 lemma tgt_slice {j t : ℕ} (hj : j < S.jobs) (ht : t < (S.elig j).length) :
     (tgtBlock S).getD (offOf S j + t) 0 = (S.elig j).getD t 0 := by
@@ -216,7 +216,7 @@ lemma mem_elig_iff {j : ℕ} (hj : j < S.jobs) (i : ℕ) :
       List.getD_eq_getElem?_getD, List.getElem?_eq_getElem ht', Option.getD_some] at hget
     exact hget ▸ List.getElem_mem ht'
 
-/-! ### The word encodes the instance -/
+/-! ### The Word Encodes the Instance -/
 
 /-- **A word built from an instance's accessors encodes it.** -/
 theorem encodesInstance (I : Instance)

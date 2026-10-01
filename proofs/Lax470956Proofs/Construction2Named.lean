@@ -14,7 +14,7 @@ open Lax470956.Scheduling Lax470956.Exact34Encoding Lax470956.Construction2
 
 variable {x : List ℕ}
 
-/-! ### Deadlines of a well-formed formula -/
+/-! ### Deadlines of a Well-Formed Formula -/
 
 lemma dl_eq (hwf : WellFormed x) (c : Fin (nCla x)) (h : Fin 3) :
     dl x c h = 2 * (litApp x c h + 1) + 8 * (h : ℕ) :=
@@ -51,7 +51,7 @@ lemma dl_ne_of_occ_ne (hwf : WellFormed x) {c c' : Fin (nCla x)} {h h' : Fin 3}
   rw [dl_eq hwf, dl_eq hwf]
   omega
 
-/-! ### The interval of each kind of job -/
+/-! ### The Interval of Each Kind of Job -/
 
 section Intervals
 
@@ -112,7 +112,7 @@ lemma d_cls (c : Fin (nCla x)) (h s : Fin 3) :
 
 end Intervals
 
-/-! ### Eligible machines, named -/
+/-! ### Eligible Machines, Named -/
 
 /-- Two named machines are equal exactly when their numbers are. -/
 lemma mIdx_val_inj {i i' : MachS x} (h : (mIdx x i : ℕ) = (mIdx x i' : ℕ)) : i = i' :=

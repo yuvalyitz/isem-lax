@@ -27,7 +27,7 @@ abbrev md (e f : Expr) : Expr := sub e (mul (dv e f) f)
 abbrev bump (s : String) : Com := .assign s (add (V s) (lit 1))
 abbrev set (s : String) (e : Expr) : Com := .assign s e
 
-/-! ### The header -/
+/-! ### The Header -/
 
 def header : Com :=
   .seq (set "n" (.get "a" (lit 0)))
@@ -37,7 +37,7 @@ def header : Com :=
           (.seq (set "O0" (add (lit 2) (mul (lit 3) (V "n"))))
             (set "T0" (add (lit 3) (mul (lit 4) (V "n"))))))))
 
-/-! ### The largest processing time -/
+/-! ### The Largest Processing Time -/
 
 /-- The larger of two values, with truncated subtraction. -/
 abbrev mx (e f : Expr) : Expr := add e (sub f e)
@@ -52,7 +52,7 @@ def pmaxBody : Com :=
 def pmaxLoop : Com :=
   .seq (set "P" (lit 0)) (.seq (set "j" (lit 0)) (.while (.lt (V "j") (V "n")) pmaxBody))
 
-/-! ### The powers that index the table -/
+/-! ### The Powers That Index the Table -/
 
 def powBody : Com :=
   .seq (.store "pw" (V "i") (V "S")) (.seq (set "S" (mul (V "S") (add (V "P") (lit 1)))) (bump "i"))
@@ -60,7 +60,7 @@ def powBody : Com :=
 def powLoop : Com :=
   .seq (set "S" (lit 1)) (.seq (set "i" (lit 0)) (.while (.lt (V "i") (V "m")) powBody))
 
-/-! ### The jobs of each deadline -/
+/-! ### The Jobs of Each Deadline -/
 
 def bucketBody : Com :=
   .seq (.assign "dd" (.get "a" (add (add (lit 2) (V "n")) (V "j"))))
@@ -71,7 +71,7 @@ def bucketBody : Com :=
 def bucketLoop : Com :=
   .seq (set "j" (lit 0)) (.while (.lt (V "j") (V "n")) bucketBody)
 
-/-! ### Block starts, and the next deadline inside a block -/
+/-! ### Block Starts, and the Next Deadline Inside a Block -/
 
 /-- The cell `occ` is read below `dd` — a violation of the block start — and above it,
 counting down, so that the last write wins and `nx` ends at the nearest occupied point.
@@ -98,7 +98,7 @@ def startLoop : Com :=
   .seq (set "Pm" (sub (V "P") (lit 1)))
     (.seq (set "j" (lit 0)) (.while (.lt (V "j") (V "n")) startBody))
 
-/-! ### Walking the blocks -/
+/-! ### Walking the Blocks -/
 
 /-- Write out one job of the deadline in hand. -/
 def emitStep : Com :=
@@ -262,7 +262,7 @@ def com : Com :=
         (.ite (.eq (V "W") (lit 0)) (.write (lit 1)) (.write (lit 0)))
         mainWork)))
 
-/-! ### The layout -/
+/-! ### The Layout -/
 
 def layout : Layout :=
   ⟨["L", "rt", "rv", "n", "m", "W", "cap", "O0", "T0", "v", "j", "P", "S", "i", "dd",

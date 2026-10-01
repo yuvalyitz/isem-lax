@@ -1,74 +1,46 @@
 specVersion: "1"
 id: lax-470956
-leanVersion: "v4.33.0"
-mathlibVersion: "db584cd6d46c92f209a44c0f1c829460d327499d"
-title: "Interval Scheduling with Eligible Machine Sets"
+leanVersion: v4.33.0
+mathlibVersion: db584cd6d46c92f209a44c0f1c829460d327499d
+title: Interval Scheduling with Eligible Machine Sets
 authors:
   - name: Yuval Itzhaki
     github: yuvalyitz
   - name: Claude
 bibEntries:
-  - "@article{hermelin2024isem,
-
-    \  author  = {Hermelin, Danny and Itzhaki, Yuval and Molter, Hendrik and
-    Shabtay, Dvir},
-
-    \  title   = {On the parameterized complexity of interval scheduling with
-    eligible machine sets},
-
-    \  journal = {Journal of Computer and System Sciences},
-
-    \  volume  = {144},
-
-    \  pages   = {103533},
-
-    \  year    = {2024},
-
-    \  publisher = {Elsevier},
-
-    \  doi     = {10.1016/j.jcss.2024.103533}
-
-    }\n"
-  - "@article{fellows2009multiinterval,
-
-    \  author  = {Fellows, Michael R. and Hermelin, Danny and Rosamond, Frances
-    and Vialette, St{\\'e}phane},
-
-    \  title   = {On the parameterized complexity of multiple-interval graph
-    problems},
-
-    \  journal = {Theoretical Computer Science},
-
-    \  volume  = {410},
-
-    \  number  = {1},
-
-    \  pages   = {53--61},
-
-    \  year    = {2009},
-
-    \  doi     = {10.1016/j.tcs.2008.09.065}
-
-    }\n"
-  - "@article{tovey1984simplified,
-
-    \  author  = {Tovey, Craig A.},
-
-    \  title   = {A simplified {NP}-complete satisfiability problem},
-
-    \  journal = {Discrete Applied Mathematics},
-
-    \  volume  = {8},
-
-    \  number  = {1},
-
-    \  pages   = {85--89},
-
-    \  year    = {1984},
-
-    \  doi     = {10.1016/0166-218X(84)90081-7}
-
-    }\n"
+  - |
+    @article{hermelin2024isem,
+      author  = {Hermelin, Danny and Itzhaki, Yuval and Molter, Hendrik and Shabtay, Dvir},
+      title   = {On the Parameterized Complexity of Interval Scheduling with Eligible Machine Sets},
+      journal = {Journal of Computer and System Sciences},
+      volume  = {144},
+      pages   = {103533},
+      year    = {2024},
+      publisher = {Elsevier},
+      doi     = {10.1016/j.jcss.2024.103533}
+    }
+  - |
+    @article{fellows2009multiinterval,
+      author  = {Fellows, Michael R. and Hermelin, Danny and Rosamond, Frances and Vialette, St{\'e}phane},
+      title   = {On the Parameterized Complexity of Multiple-Interval Graph Problems},
+      journal = {Theoretical Computer Science},
+      volume  = {410},
+      number  = {1},
+      pages   = {53--61},
+      year    = {2009},
+      doi     = {10.1016/j.tcs.2008.09.065}
+    }
+  - |
+    @article{tovey1984simplified,
+      author  = {Tovey, Craig A.},
+      title   = {A Simplified {NP}-Complete Satisfiability Problem},
+      journal = {Discrete Applied Mathematics},
+      volume  = {8},
+      number  = {1},
+      pages   = {85--89},
+      year    = {1984},
+      doi     = {10.1016/0166-218X(84)90081-7}
+    }
 paper:
   folder: paper
   main: main.tex

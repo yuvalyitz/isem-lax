@@ -2,7 +2,7 @@ import Lax759944.RamPolytime
 
 /-!
 ---
-title: Polynomial-time many-one reductions on the word RAM
+title: Polynomial-Time Many-One Reductions on the Word RAM
 type: definition
 ---
 A *polynomial-time many-one reduction* from one set of words to another is a map on
@@ -10,7 +10,7 @@ words, computable by a word RAM program in time polynomial in the bit-size of it
 that preserves and reflects membership. A reduction whose image additionally lies in a
 given class witnesses hardness on that class.
 
-# Formalization notes
+# Formalization Notes
 
 Computability is `Lax759944.RamPolytime`, which measures time in the bit-size of the
 input rather than the number of entries, and quantifies the program before the word

@@ -117,7 +117,7 @@ lemma jobNum_lt (j : Job (ofInstance G)) : jobNum G j < nJobs G := by
 /-- The job numbering, as a slot. -/
 noncomputable def jobFun (j : Job (ofInstance G)) : Fin (nJobs G) := ⟨jobNum G j, jobNum_lt G j⟩
 
-/-! ### Reading the concept's accessors at a job's slot -/
+/-! ### Reading the Concept's Accessors at a Job's Slot -/
 
 lemma col_vnum (v : (ofInstance G).V) :
     col (G := G) (vnum G v) = ((ofInstance G).color v : ℕ) := by
@@ -128,7 +128,7 @@ lemma pos_vnum (v : (ofInstance G).V) : pos (G := G) (vnum G v) = (ord G).π v :
   simp only [pos, dif_pos (vnum_lt G v)]
   rfl
 
-/-! ### The vertex jobs -/
+/-! ### The Vertex Jobs -/
 
 variable {G}
 
@@ -173,7 +173,7 @@ lemma wtOf_v (x : VJob (ofInstance G)) :
   · rw [if_pos ((vtest x).mpr h), if_pos h]
   · rw [if_neg (fun hc => h ((vtest x).mp hc)), if_neg h, c1_eq]
 
-/-! ### The colour combination jobs -/
+/-! ### The Colour Combination Jobs -/
 
 lemma jobNum_c (x : CJob (ofInstance G)) :
     jobNum G (Sum.inr (Sum.inr x)) = cIdx G (x.1.1.lo : ℕ) (x.1.1.hi : ℕ) (vnum G x.1.2) := rfl
@@ -233,7 +233,7 @@ lemma wtOf_c (x : CJob (ofInstance G)) :
   · rw [if_pos (congrArg Fin.val h), if_pos h]
   · rw [if_neg (fun hc => h (Fin.ext hc)), if_neg h]
 
-/-! ### The edge jobs -/
+/-! ### The Edge Jobs -/
 
 lemma jobNum_e (e : EJob (ofInstance G)) :
     jobNum G (Sum.inr (Sum.inl e)) = eIdx G (eidx G e) := rfl
@@ -285,7 +285,7 @@ lemma wtOf_e (e : EJob (ofInstance G)) :
   simp only [if_pos (eok e)]
   rw [eW, ejU_e, ejV_e, pos_vnum, pos_vnum, c2_eq, c3_eq]
 
-/-! ### The three families together -/
+/-! ### The Three Families Together -/
 
 lemma rawProc_eq (j : Job (ofInstance G)) :
     rawProc G (jobNum G j) = (isem (ofInstance G) (ord G)).p j := by
@@ -544,7 +544,7 @@ lemma elig_eq_image (j : Job (ofInstance G)) :
     rw [← he, machEquiv_apply]
     exact (elig_mem_iff j m).mpr hm
 
-/-! ### Every real slot is a job -/
+/-! ### Every Real Slot Is a Job -/
 
 lemma col_mk {u : ℕ} (hu : u < G.vertices) :
     col (G := G) u = ((G.colour ⟨u, hu⟩ : Fin G.colours) : ℕ) := dif_pos hu
@@ -619,7 +619,7 @@ lemma inert {s : Fin (nJobs G)} (hs : ∀ j, jobFun G j ≠ s) :
         rw [wtOf, if_neg (by omega), if_neg (by omega)]
         simp only [if_neg hok]
 
-/-! ### The renumbering, and Construction 1's correctness -/
+/-! ### The Renumbering, and Construction 1's Correctness -/
 
 variable (G)
 

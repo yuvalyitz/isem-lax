@@ -21,7 +21,7 @@ variable (G : Lax470956.MulticolouredClique.Instance)
 noncomputable def blocks : Lax470956Proofs.Encoder.Blocks :=
   ⟨nJobs G, nMach G, procOf G, dueOf G, wtOf G, eligOf G⟩
 
-/-! ### Every machine number the construction lists is a machine -/
+/-! ### Every Machine Number the Construction Lists Is a Machine -/
 
 lemma vjCol_lt {j : ℕ} (hj : j < nVJob G) : vjCol G j < G.colours := by
   have hk : 0 < G.colours := by
@@ -101,7 +101,7 @@ lemma elig_lt {j : ℕ} (hj : j < nJobs G) {v : ℕ} (hv : v ∈ eligOf G j) : v
     · exact elig_lt_c G h h2 hv
     · exact elig_lt_e G (by omega) hj hv
 
-/-! ### The encoding -/
+/-! ### The Encoding -/
 
 theorem encodesInstance_emit :
     EncodesInstance (Lax470956Proofs.Encoder.emit (blocks G)) (inst G) :=

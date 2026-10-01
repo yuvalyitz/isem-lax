@@ -95,7 +95,7 @@ theorem tail_spec (hB : y.length + 10 < B) (K2 KE : ℕ)
   · exact ⟨⟨hN, by rw [hsgw]; exact hsl, fun j hj => by rw [hsgw]; exact hsg j hj⟩,
       by rw [hCw]; exact hC, by rw [houtw]; exact hS.2.2.1⟩
 
-/-! ### The whole program -/
+/-! ### The Whole Program -/
 
 def scanInit : Com :=
   .seq (set "ph" 0) (.seq (set "n" 0) (.seq (set "h" 0) (.seq (set "C" 0) (set "k" 0))))

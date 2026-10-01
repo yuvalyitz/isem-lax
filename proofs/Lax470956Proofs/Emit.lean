@@ -214,7 +214,7 @@ lemma mem_eligOf_iff {j : ℕ} (hj : j < nJobs x) (i : ℕ) :
       List.getD_eq_getElem?_getD, List.getElem?_eq_getElem ht', Option.getD_some] at hget
     exact hget ▸ List.getElem_mem ht'
 
-/-! ### The emitted word encodes the constructed instance -/
+/-! ### The Emitted Word Encodes the Constructed Instance -/
 
 open Lax470956.Exact34Encoding in
 /-- On a well-formed formula every machine number the construction emits is a machine of

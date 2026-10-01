@@ -12,7 +12,7 @@ A formalization of the W[1]-hardness reduction of Hermelin–Itzhaki–Molter–
 *"On the parameterized complexity of interval scheduling with eligible machine sets"*,
 JCSS 144 (2024) 103533: Section 3, Construction 1, Observation 3, Lemmas 1–2, Theorem 1.
 
-## What is implemented
+## What Is Implemented
 
 * `ISEM` — Interval Scheduling on Eligible Machines (Section 2), with schedules,
   conflicts, feasibility and the weight objective.
@@ -34,7 +34,7 @@ JCSS 144 (2024) 103533: Section 3, Construction 1, Observation 3, Lemmas 1–2, 
 **Complete.** Observation 3, Lemma 1, Lemma 2 and Theorem 1 are all proved;
 The correctness of the reduction is proved here, never assumed.
 
-## Deviations from the paper (all deliberate, all documented)
+## Deviations from the Paper (all Deliberate, All Documented)
 
 1. **Colors are 0-indexed.** The paper uses `V₁, …, V_k`, i.e. `ℓ ∈ {1,…,k}`; here
    `ℓ : Fin k`, i.e. `ℓ ∈ {0,…,k-1}`. This is a uniform shift and preserves every
@@ -128,7 +128,7 @@ structure VertexOrder where
   π_inj : Function.Injective π
   π_mono : ∀ u v, G.color u < G.color v → π u < π v
 
-/-! ### 3.1 Weight constants -/
+/-! ### 3.1 Weight Constants -/
 
 /-- `c₁ = n_G + 1`. -/
 def c1 : ℕ := nG G + 1
@@ -139,7 +139,7 @@ def c2 : ℕ := (k - 1) * nG G * c1 G + nG G + 1
 /-- `c₃ = (k·n_G + k²·n_G)·n_G·c₂ + 1`. -/
 def c3 : ℕ := (k * nG G + k ^ 2 * nG G) * nG G * c2 G + 1
 
-/-! ### 3.2 Jobs and machines -/
+/-! ### 3.2 Jobs and Machines -/
 
 /-- A vertex job `j_v^{(ℓ)}`: a vertex together with one of the `k` colors. -/
 abbrev VJob : Type := G.V × Fin k
@@ -275,7 +275,7 @@ def jobW : Job G → ℕ
 @[simp] def jobW_edge (e : EJob G) : jobW G ord (Sum.inr (Sum.inl e)) = eW G ord e := rfl
 @[simp] def jobW_comb (x : CJob G) : jobW G ord (Sum.inr (Sum.inr x)) = cW G ord x := rfl
 
-/-! ### 3.4 Eligible machine sets -/
+/-! ### 3.4 Eligible Machine Sets -/
 
 /-- Eligible machines of `j_v^{(ℓ)}`: always the validation machine, plus the edge
 selection machine of the combination `{color v, ℓ}` when `ℓ ≠ color v`. -/
@@ -331,7 +331,7 @@ lemma vElig_ownColor (v : G.V) : vElig G (v, G.color v) = {validationMachine k} 
     simp only [validationMachine, Finset.mem_singleton, reduceCtorEq, iff_false]
     exact hnot
 
-/-! ### 3.5 Well-formedness of the construction -/
+/-! ### 3.5 Well-Formedness of the Construction -/
 
 section Arithmetic
 
@@ -609,7 +609,7 @@ lemma vertex_sep_same {v : G.V} {ℓ ℓ' : Fin k} (h1 : ℓ ≠ G.color v) (h2 
 
 variable (G ord)
 
-/-! ### 3.7 The weight threshold -/
+/-! ### 3.7 The Weight Threshold -/
 
 /-- The threshold `W = C(k,2)·c₃ + C(k,2)·n_G·c₂ + (k-1)·n_G·c₁ + k` of Lemmas 1 and 2. -/
 def targetWeight : ℕ :=
@@ -622,7 +622,7 @@ stated over the actual construction.
 
 Everything here is proved; the reduction's correctness is never assumed. -/
 
-/-! ### 4.1 Lemma 1: turning a clique into a schedule -/
+/-! ### 4.1 Lemma 1: Turning a Clique Into a Schedule -/
 
 section Lemma1
 
@@ -1769,7 +1769,7 @@ lemma weight_le_master (B : ColorPair k ⊕ ColorPair k → ℕ) (VB : ℕ)
 
 end Lemma2Master
 
-/-! ### 4.6 Lemma 2 — reading off the clique -/
+/-! ### 4.6 Lemma 2 — Reading Off the Clique -/
 
 section Lemma2Final
 

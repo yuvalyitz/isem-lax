@@ -1,8 +1,8 @@
-# The parameterized complexity of interval scheduling with eligible machine sets
+# Interval Scheduling with Eligible Machine Sets
 
 A [Lax archive](https://github.com/lax-archive/lax) submission (`lax-470956`) formalizing
-the three results of Hermelin, Itzhaki, Molter and Shabtay, *On the parameterized
-complexity of interval scheduling with eligible machine sets*, Journal of Computer and
+the three results of Hermelin, Itzhaki, Molter and Shabtay, *On the Parameterized
+Complexity of Interval Scheduling with Eligible Machine Sets*, Journal of Computer and
 System Sciences 144 (2024): W[1]-hardness for the number of machines, para-NP-hardness for
 the largest processing time, and fixed-parameter tractability for the two combined.
 
@@ -20,14 +20,14 @@ Lean `v4.33.0` via [elan](https://github.com/leanprover/elan), and the
 [`lax` CLI](https://github.com/lax-archive/lax). The mathlib revision is pinned in
 `manifest.yaml`; Lake fetches it on first build.
 
-## Verifying it
+## Verification
 
-The one command that checks everything:
+Run the archive validation:
 
     lax build .
 
 Its last stage, *Inspecting the statements*, pairs every statement with its proof and
-reports `17 concepts · 26 proofs`.
+reports `17 concepts · 27 proofs`.
 
 To check a single module while editing, from `proofs/`:
 
@@ -48,11 +48,10 @@ and `Quot.sound` for all three, and `Lax345332.ThreeFourSat.npHard` for the seco
 > Anything placed inside `proofs/Lax470956Proofs/` must also be imported by
 > `Lax470956Proofs.lean`, or the build is rejected. Keep scratch work elsewhere.
 
-## Reading it
+## Reading Guide
 
-Read `concepts/` and let the build vouch for `proofs/`: about 1,900 lines of statements
-against about 24,500 lines of proof. Lean's kernel checks the proofs; only a reader can
-judge whether the statements say what they claim.
+The `concepts/` directory contains the definitions and theorem statements; `proofs/`
+contains their Lean proofs. Start with the definitions, encodings, and main theorems.
 
 Suggested order:
 
@@ -100,9 +99,9 @@ Beyond mathlib, this submission builds on six others in the archive:
   verified compiler.
 - `lax-271696`, *Algorithmic Experiments on a Random Access Machine* (Jan Dreier): the
   encoding of a graph as a word.
-- `lax-759944`, *Computability and polynomial-time equivalence of Turing machines and word
+- `lax-759944`, *Computability and Polynomial-Time Equivalence of Turing Machines and Word
   RAMs* (Szymon Toruńczyk).
-- `lax-345332`, *(3,4)-SAT is NP-hard* (Yuval Itzhaki, Claude): Tovey's theorem, cited through
+- `lax-345332`, *(3,4)-SAT and [2,3]-Bounded 3-SAT Are NP-Hard* (Yuval Itzhaki, Claude): Tovey's theorem, cited through
   its statement. While that submission is a draft the build has to admit it as a sibling
   checkout: `lax build . --nonstrict`.
 

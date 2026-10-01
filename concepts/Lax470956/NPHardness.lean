@@ -3,7 +3,7 @@ import Lax434930.NondeterministicPolynomialTime
 
 /-!
 ---
-title: NP-hardness of a scheduling problem, and on a class of instances
+title: NP-Hardness of a Scheduling Problem, and on a Class of Instances
 type: definition
 ---
 A scheduling problem is *NP-hard* if every language in NP has a polynomial-time many-one
@@ -17,7 +17,7 @@ $f$, unless $\mathrm{P} = \mathrm{NP}$ — a stronger and unconditional-in-$f$ c
 than W[1]-hardness, which rules out fixed-parameter tractability only under
 $\mathrm{W}[1] \ne \mathrm{FPT}$.
 
-# Formalization notes
+# Formalization Notes
 
 Hardness is defined by quantifying over NP, not against a fixed complete problem. NP is
 available — `Lax434930` defines it — so the definition a textbook gives can be written

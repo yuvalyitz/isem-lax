@@ -12,7 +12,7 @@ open Lax470956Proofs.ParseNames Lax470956Proofs.Theorem2Assembly
 
 variable {B : ℕ} {vs ss : List ℕ}
 
-/-! ### Writing the word -/
+/-! ### Writing the Word -/
 
 def emitBody : Com :=
   .seq (.write (.get "nm" (V "q"))) (.seq (.write (.get "sg" (V "q")))
@@ -87,7 +87,7 @@ theorem emitAll_spec (M C0 KE : ℕ) (hM : vs.length < M) (hB : M + 9 < B)
   · simp_all [word]
   · exact ⟨⟨⟨hk, hlen, hvr⟩, hrest⟩, h1, h2⟩
 
-/-! ### From the scan to the names -/
+/-! ### From the Scan to the Names -/
 
 open Lax429075.CNF Lax434930.PolynomialTime
 

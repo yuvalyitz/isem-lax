@@ -69,7 +69,7 @@ lemma Ctx.congr {σ σ' : Env} (h : Ctx I P n S C ord dl nc x σ)
   lenDl := by rw [ha "dl" (by decide)]; exact h.lenDl
   lenNc := by rw [ha "nc" (by decide)]; exact h.lenNc
 
-/-! ### The eligibility scan -/
+/-! ### The Eligibility Scan -/
 
 /-- The machines the word lists for the job at `jb`, as far as `e`. -/
 def eligList (I : Instance) (x : List ℕ) (jb : ℕ) (i0 : Fin I.machines)
@@ -254,7 +254,7 @@ theorem entryLoop_spec (jb pj wj elen : ℕ) (T : ℕ → ℕ) (i0 : Fin I.machi
   rw [he] at hTV2'
   exact ⟨σ', hrun.mono (le_of_eq (by ring)), hctx', hTV', hTV2', hjb'⟩
 
-/-! ### The loop invariant -/
+/-! ### The Loop Invariant -/
 
 variable (I P n S C ord dl nc x) in
 /-- The sweep, between jobs. -/
@@ -296,7 +296,7 @@ structure Bnd (B : ℕ) (I : Instance) (P n S C : ℕ) (dl : ℕ → ℕ) (x : L
   dlB : ∀ k, k < n → S + P + dl k + 2 < B
   wB : ∀ i, C + x.getD i 0 + 3 < B
 
-/-! ### Two small facts about running a command -/
+/-! ### Two Small Facts About Running a Command -/
 
 /-- No command can change the length of an array: the only way to touch one is a store,
 and a store overwrites a cell. -/
@@ -322,7 +322,7 @@ lemma run_arrs_length {c : Com} {σ σ' : Env} {K : ℕ} (h : Run B c σ σ' K)
 export Lax470956Proofs.ReadHdr (evalB_lit evalB_var evalB_add evalB_sub evalB_mul
   evalB_getE evalB_getvar)
 
-/-! ### Setting the table up for one job -/
+/-! ### Setting the Table Up for One Job -/
 
 variable (I P n S C ord dl nc x) in
 /-- What `startJob` leaves behind: the table has been carried to the job's deadline,
@@ -367,7 +367,7 @@ variable (I P n S C ord dl nc x) in
 def JDone (k : ℕ) (σ : Env) : Prop :=
   JA5 I P n S C ord dl nc x k σ ∧ σ.vars "tp" = dl k
 
-/-! ### What the passes do not write -/
+/-! ### What the Passes Do Not Write -/
 
 lemma notMem_closeBlock {y : String} (h : y ∉ ["bst", "c", "acc"]) : y ∉ closeBlock.wvars :=
   fun hm => h (wvars_closeBlock y hm)
@@ -396,7 +396,7 @@ lemma nc_cond {σ : Env} {k : ℕ} (hctx : Ctx I P n S C ord dl nc x σ) (hkv : 
   simp only [Cond.evalB, h]
   cases nc k <;> simp [Expr.evalB, fit_self hB1]
 
-/-! ### `startJob`, one phase at a time -/
+/-! ### `startJob`, One Phase at a Time -/
 
 /-- Two capped totals add up to the capped total. -/
 lemma min_add_min (a b c : ℕ) : min (min a c + (min b c + 1 - 1)) c = min (a + b) c := by omega
@@ -641,7 +641,7 @@ theorem startJob_spec (hO : Order I P n ord dl nc) (hB : Bnd B I P n S C dl x) (
   exact ((head1_spec (B := B) hO hB k hk).seq h4 (fun _ _ _ h => h)
     (fun _ _ _ _ _ h => h)).mono (le_of_eq (by ring))
 
-/-! ### Reading the job in hand off the word -/
+/-! ### Reading the Job in Hand Off the Word -/
 
 /-- What the sweep needs to know about the word it was handed. -/
 structure Enc (I : Instance) (x : List ℕ) : Prop where
@@ -766,7 +766,7 @@ theorem jobData_spec (hO : Order I P n ord dl nc) (hB : Bnd B I P n S C dl x)
   · simp [Env.setVar]
   · simp [Env.setVar]
 
-/-! ### Trying the job on its machines -/
+/-! ### Trying the Job on Its Machines -/
 
 /-- How many machines the word lists for job `j`. -/
 def elenOf (x : List ℕ) (j : ℕ) : ℕ := offset x (j + 1) - offset x j
@@ -908,7 +908,7 @@ theorem sweepBody_spec (hO : Order I P n ord dl nc) (hB : Bnd B I P n S C dl x)
   exact ((startJob_spec (B := B) hO hB k hk).seq h2
     (fun _ _ _ h => h) (fun _ _ _ _ _ h => h)).mono (le_of_eq (by ring))
 
-/-! ### The sweep's outer loop -/
+/-! ### The Sweep's Outer Loop -/
 
 /-- What one turn costs, the loop's own test included. -/
 def bodyCost (m S e : ℕ) : ℕ := (44 * m + 148) * S + (84 * S + 24) * e + 117

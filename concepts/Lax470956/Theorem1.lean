@@ -3,7 +3,7 @@ import Lax470956.SchedulingProblems
 
 /-!
 ---
-title: Interval scheduling is W[1]-hard for the number of machines
+title: Interval Scheduling Is W[1]-Hard for the Number of Machines
 type: theorem
 ---
 Multicoloured Clique, parameterized by the number of colours, fpt-reduces to interval
@@ -23,7 +23,7 @@ those two colour classes, and one validation machine. The parameter of the image
 on the parameter of the source alone, so the reduction is an fpt-reduction
 and not merely a correct one.
 
-# Formalization notes
+# Formalization Notes
 
 The statement is the existence of an fpt-reduction, which unfolds to one map, one
 program and one constant serving every instance and every admitting word length. It does

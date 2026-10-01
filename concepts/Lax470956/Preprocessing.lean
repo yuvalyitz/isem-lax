@@ -2,7 +2,7 @@ import Lax470956.DynamicProgram
 
 /-!
 ---
-title: Preprocessing an interval scheduling instance down to a bounded number of live jobs
+title: Preprocessing an Interval Scheduling Instance Down to a Bounded Number of Live Jobs
 type: definition
 ---
 The step that makes the dynamic program fixed-parameter tractable. Two jobs with the
@@ -20,7 +20,7 @@ per machine and there are $m$ machines. So at most $p_{\max}^2 m^2$ surviving jo
 alive at any one instant — a bound in the parameter alone. Fed into the state-space
 bound of the dynamic program, this makes the table's size a function of $m$ and $p_{\max}$.
 
-# Formalization notes
+# Formalization Notes
 
 Discarding is modelled as a set of kept jobs together with the best weight achievable
 using only those, rather than as a second instance on a smaller job set. The two say the

@@ -189,7 +189,7 @@ lemma loop2_exec (ts o : List Bool) :
         (by simpa using hrest)⟩
       simp only [List.length_cons]; omega
 
-/-! ### What the loop computes -/
+/-! ### What the Loop Computes -/
 
 /-- Everything the machine writes: the bits pushed, then the pending one. -/
 def total (p : Option Bool) (l : List Symbol) : List Bool :=

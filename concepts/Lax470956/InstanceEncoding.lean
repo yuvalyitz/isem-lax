@@ -2,7 +2,7 @@ import Lax470956.Scheduling
 
 /-!
 ---
-title: Word encoding of a scheduling instance
+title: Word Encoding of a Scheduling Instance
 type: definition
 ---
 A scheduling instance is handed to a word random access machine as a word of numbers:
@@ -12,7 +12,7 @@ job in turn, the machines eligible to run it. The offsets say where each job's b
 eligible machines begins, the first being $0$ and the last the length of the target
 array. A decision instance appends the threshold $W$ as a final entry.
 
-# Formalization notes
+# Formalization Notes
 
 The eligible sets are in the same compressed sparse row form that presents a graph to a
 machine elsewhere in the archive, for the same reason: it is the adjacency-array format

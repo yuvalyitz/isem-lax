@@ -27,7 +27,7 @@ The weights are chosen in three tiers, $c_1 \ll c_2 \ll c_3$, so that a schedule
 target weight is forced to select one edge per colour pair, and then forced to have those
 $\binom{k}{2}$ edges agree on one vertex per colour — which is the clique.
 
-# Formalization notes
+# Formalization Notes
 
 The construction is a total function on Multicoloured Clique instances, so the map it
 induces is defined everywhere and the statements about it need no side condition.

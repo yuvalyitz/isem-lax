@@ -5,7 +5,7 @@ import Lax470956.SchedulingProblems
 
 /-!
 ---
-title: Scheduling every job is hard for constant processing times and unit weights
+title: Scheduling Every Job Is Hard for Constant Processing Times and Unit Weights
 type: theorem
 ---
 Deciding whether every job of an interval scheduling instance can be scheduled is
@@ -26,7 +26,7 @@ length $25$, and each variable becomes one job spanning that whole window. The b
 number of occurrences of a variable is what keeps the window, and with it every
 processing time, bounded by a constant.
 
-# Formalization notes
+# Formalization Notes
 
 Three separate statements, because they are three assertions with different content and
 different costs to establish.

@@ -21,7 +21,7 @@ variable job on one of the two machines of its variable, and that choice is the 
 value. The bounded number of occurrences of a variable is what keeps the window, and
 with it every processing time, bounded by an absolute constant.
 
-# Formalization notes
+# Formalization Notes
 
 The construction is a total function on words, so that the map it induces is defined
 everywhere and the statements about it need no side condition. A word that is not a
