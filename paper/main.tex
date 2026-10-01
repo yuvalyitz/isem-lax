@@ -23,6 +23,7 @@
 \crefname{observation}{Observation}{Observations}
 \Crefname{observation}{Observation}{Observations}
 
+\newcommand{\doi}[1]{DOI: \href{https://doi.org/#1}{\nolinkurl{#1}}}
 \newcommand{\pmax}{p_{\max}}
 \newcommand{\ProbEM}{\textsc{Interval Scheduling on Eligible Machines}}
 \newcommand{\MCC}{\textsc{Multicolored Clique}}
@@ -158,23 +159,20 @@ $c_3=(kn_G+k^2n_G)n_Gc_2+1$.
 We create $m=\binom{k}{2}+1$ machines: one \emph{edge selection machine} for each color
 combination $\ell,\ell'$ with $\ell<\ell'$, and one \emph{validation machine}. We create
 the following jobs.
-\begin{center}
-\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{@{}llll@{}}
-\toprule
-job & processing time & deadline & weight\\
-\midrule
-\multicolumn{4}{@{}l}{\emph{vertex jobs}, for $v\in V_\ell$ and each color $\ell'\neq\ell$}\\
-$j_v^{(\ell)}$ & $k+2$ & $(k+2)\pi(v)+1$ & $1$\\
-$j_v^{(\ell')}$ & $1$ & $(k+2)\pi(v)-\ell'$ & $c_1$\\
-\multicolumn{4}{@{}l}{\emph{edge jobs}, for $e=\{u,v\}\in E$ with $u\in V_\ell$, $v\in V_{\ell'}$, $\ell<\ell'$}\\
-$j_e$ & $(k+2)(\pi(v)-\pi(u))-\ell+\ell'-1$ & $(k+2)\pi(v)-\ell-1$ & $c_2(\pi(v)-\pi(u))+c_3$\\
-\multicolumn{4}{@{}l}{\emph{color combination jobs}, for $\ell<\ell'$, each $u\in V_\ell$ and each $v\in V_{\ell'}$}\\
-$j_u^{(\ell,\ell')}$ & $(k+2)\pi(u)-\ell'-2$ & $(k+2)\pi(u)-\ell'-1$ & $c_2\pi(u)$\\
-$j_v^{(\ell,\ell')}$ & $(k+2)(n_G-\pi(v))+\ell+2$ & $(k+2)n_G+2$ & $c_2(n_G-\pi(v))$\\
-\bottomrule
-\end{tabular}
-\end{center}
+\begin{itemize}
+\item For each vertex $v\in V_\ell$ we create $k$ \emph{vertex jobs} $j_v^{(0)},\ldots,j_v^{(k-1)}$.
+  The job $j_v^{(\ell)}$ has processing time $k+2$, deadline $(k+2)\pi(v)+1$ and weight $1$.
+  For each color $\ell'\neq\ell$ the job $j_v^{(\ell')}$ has processing time $1$, deadline
+  $(k+2)\pi(v)-\ell'$ and weight $c_1$.
+\item For each edge $e=\{u,v\}\in E$ with $u\in V_\ell$, $v\in V_{\ell'}$ and $\ell<\ell'$ we
+  create one \emph{edge job} $j_e$ with processing time $(k+2)(\pi(v)-\pi(u))-\ell+\ell'-1$,
+  deadline $(k+2)\pi(v)-\ell-1$ and weight $c_2(\pi(v)-\pi(u))+c_3$.
+\item For each color combination $\ell<\ell'$ we create $|V_\ell|+|V_{\ell'}|$ \emph{color
+  combination jobs}. For $u\in V_\ell$ the job $j_u^{(\ell,\ell')}$ has processing time
+  $(k+2)\pi(u)-\ell'-2$, deadline $(k+2)\pi(u)-\ell'-1$ and weight $c_2\pi(u)$. For
+  $v\in V_{\ell'}$ the job $j_v^{(\ell,\ell')}$ has processing time
+  $(k+2)(n_G-\pi(v))+\ell+2$, deadline $(k+2)n_G+2$ and weight $c_2(n_G-\pi(v))$.
+\end{itemize}
 The validation machine is an eligible machine of all vertex jobs. The edge selection
 machine for color combination $\ell,\ell'$ with $\ell<\ell'$ is a further eligible machine
 of the vertex jobs $j_u^{(\ell')}$ with $u\in V_\ell$ and $j_v^{(\ell)}$ with
@@ -390,22 +388,27 @@ constants: by \Cref{obs:fpt} we have $|J_t|\le m^2\pmax^2$ after applying
 E.~M. Arkin and E.~B. Silverberg.
 \newblock Scheduling jobs with fixed start and end times.
 \newblock \emph{Discrete Applied Mathematics} 18(1):1--8, 1987.
+\newblock \doi{10.1016/0166-218X(87)90037-0}
 \bibitem{FHRV09}
 M.~R. Fellows, D.~Hermelin, F.~Rosamond and S.~Vialette.
 \newblock On the parameterized complexity of multiple-interval graph problems.
 \newblock \emph{Theoretical Computer Science} 410(1):53--61, 2009.
+\newblock \doi{10.1016/j.tcs.2008.09.065}
 \bibitem{HIMS24}
 D.~Hermelin, Y.~Itzhaki, H.~Molter and D.~Shabtay.
 \newblock On the parameterized complexity of interval scheduling with eligible machine sets.
 \newblock \emph{Journal of Computer and System Sciences} 144:103533, 2024.
+\newblock \doi{10.1016/j.jcss.2024.103533}
 \bibitem{MvB18}
 M.~Mnich and R.~van Bevern.
 \newblock Parameterized complexity of machine scheduling: 15 open problems.
 \newblock \emph{Computers \& Operations Research} 100:254--261, 2018.
+\newblock \doi{10.1016/j.cor.2018.07.020}
 \bibitem{Tovey84}
 C.~A. Tovey.
 \newblock A simplified NP-complete satisfiability problem.
 \newblock \emph{Discrete Applied Mathematics} 8(1):85--89, 1984.
+\newblock \doi{10.1016/0166-218X(84)90081-7}
 \end{thebibliography}
 
 \end{document}
