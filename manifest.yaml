@@ -45,3 +45,6 @@ paper:
   folder: paper
   main: main.tex
 supersedes: lax-470956
+issue:
+  repositoryId: 1320232165
+  number: 149
