@@ -33,7 +33,7 @@
 \newcommand{\Wone}{\textnormal{\textsf{W[1]}}}
 \newcommand{\NP}{\textnormal{\textsf{NP}}}
 
-\title{On the Parameterized Complexity of Interval Scheduling\\ with Eligible Machine Sets, formalized}
+\title{On the Parameterized Complexity of Interval Scheduling\\ with Eligible Machine Sets, Formalized}
 \author{Yuval Itzhaki \and Claude}
 \date{}
 
@@ -110,7 +110,7 @@ scheduled, parameterized by $\pmax$.
 % lax end
 
 % lax begin Lax470956.ParameterizedComplexity
-\begin{definition}[\FPT\ and parameterized reductions]
+\begin{definition}[\FPT\ and Parameterized Reductions]
 A parameterized problem is \emph{fixed-parameter tractable} if there are a program, a
 constant $c$ and a function $g$ such that the program decides every input $x$ with
 parameter $k$ within $c\cdot g(k)\cdot(|x|+1)$ instructions. A \emph{parameterized
@@ -125,7 +125,7 @@ parameterized reduction in this sense is one in the usual sense.
 % lax end
 
 % lax begin Lax470956.NPHardness
-\begin{definition}[\NP-hardness on a class of instances]
+\begin{definition}[\NP-Hardness on a Class of Instances]
 A scheduling problem is \emph{\NP-hard} if every language in \NP\ has a polynomial-time
 many-one reduction to it. It is \emph{\NP-hard on a class} $\mathcal{C}$ of instances if
 the reductions can be chosen to produce only instances in $\mathcal{C}$.
@@ -136,7 +136,7 @@ The reductions we construct are computed by word RAM programs in time polynomial
 number of bits of the input, which is polynomial time on a Turing machine.
 % lax end
 
-\section{\textsf{W[1]}-hardness for number \texorpdfstring{$\boldsymbol{m}$}{m} of machines}\label{sec:1}
+\section{\textsf{W[1]}-Hardness for Number \texorpdfstring{$\boldsymbol{m}$}{m} of Machines}\label{sec:1}
 
 % lax begin Lax470956.MulticolouredClique
 \begin{definition}[\MCC]
@@ -239,7 +239,7 @@ produces $m=\binom{k}{2}+1$ machines.
 Since \MCC\ is \Wone-hard, \ProbEM\ is \Wone-hard when parameterized by $m$. The class
 \Wone\ is not formalized; the formalized statement is the reduction.
 
-\section{\textsf{NP}-hardness for constant \texorpdfstring{$\boldsymbol{\pmax}$}{pmax}}\label{sec:nph}
+\section{\textsf{NP}-Hardness for Constant \texorpdfstring{$\boldsymbol{\pmax}$}{pmax}}\label{sec:nph}
 
 % lax begin Lax470956.SatVariant
 \begin{definition}[\SAT]
@@ -311,7 +311,7 @@ when $\pmax\le 25$ and all jobs have unit weight.
 \end{theorem}
 % lax end
 
-\section{\textsf{FPT} for the combination of \texorpdfstring{$\boldsymbol{m}$ and $\boldsymbol{\pmax}$}{m and pmax}}\label{sec:FPTalt}
+\section{\textsf{FPT} for the Combination of \texorpdfstring{$\boldsymbol{m}$ and $\boldsymbol{\pmax}$}{m and pmax}}\label{sec:FPTalt}
 
 % lax begin Lax470956.Preprocessing
 \begin{construction}\label{con:effective}
