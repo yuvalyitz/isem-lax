@@ -101,9 +101,8 @@ Beyond mathlib, this submission builds on six others in the archive:
   encoding of a graph as a word.
 - `lax-759944`, *Computability and Polynomial-Time Equivalence of Turing Machines and Word
   RAMs* (Szymon Toruńczyk).
-- `lax-345332`, *(3,4)-SAT and [2,3]-Bounded 3-SAT Are NP-Hard* (Yuval Itzhaki, Claude): Tovey's theorem, cited through
-  its statement. While that submission is a draft the build has to admit it as a sibling
-  checkout: `lax build . --nonstrict`.
+- `lax-345332`, *NP-Hardness of (3,4)-SAT and [2,3]-Bounded 3-SAT* (Yuval Itzhaki, Claude): Tovey's theorem, cited through
+  its statement and pinned to its registered Git revision.
 
 Three packages are required with their proofs, and the build warns about each
 (`proof-dependency`): the IMP+ language and its `run_vcg` tactic from `lax-808846`, the
