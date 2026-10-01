@@ -73,7 +73,7 @@ length that admits the input.
 
 \section{Preliminaries}\label{sec:0}
 
-% lax begin Lax470956.Scheduling
+% lax begin Lax888481.Scheduling
 \begin{definition}[\ProbEM]
 We have a set of $n$ jobs $\{j_1,\ldots,j_n\}$ and a set of $m$ machines
 $\{i_1,\ldots,i_m\}$, each of which can process one job at a time. Every job $j$ has a
@@ -91,25 +91,25 @@ The goal is to find a feasible schedule of maximum weight.
 \end{definition}
 % lax end
 
-% lax begin Lax470956.InstanceEncoding
+% lax begin Lax888481.InstanceEncoding
 An instance is given to a word RAM as a word of numbers: $n$, $m$, the processing times,
 the deadlines, the weights, and the sets $M_j$ as $n+1$ offsets into one array that lists
 the eligible machines of each job in turn. In the decision version the word ends with the
 target weight $W$.
 % lax end
-% lax begin Lax470956.BinaryEncoding
+% lax begin Lax888481.BinaryEncoding
 For \NP-hardness an instance is encoded as a binary word, with the sets $M_j$ as an
 $n\times m$ matrix.
 % lax end
 
-% lax begin Lax470956.SchedulingProblems
+% lax begin Lax888481.SchedulingProblems
 We consider three problems on these words: deciding whether there is a feasible schedule
 $\sigma$ with $w(\sigma)\ge W$, parameterized by $m$; the same problem parameterized by
 $m+\pmax$; and deciding whether there is a feasible schedule in which all jobs are
 scheduled, parameterized by $\pmax$.
 % lax end
 
-% lax begin Lax470956.ParameterizedComplexity
+% lax begin Lax888481.ParameterizedComplexity
 \begin{definition}[\FPT\ and Parameterized Reductions]
 A parameterized problem is \emph{fixed-parameter tractable} if there are a program, a
 constant $c$ and a function $g$ such that the program decides every input $x$ with
@@ -124,21 +124,21 @@ problem that is fixed-parameter tractable in this sense is so in the usual sense
 parameterized reduction in this sense is one in the usual sense.
 % lax end
 
-% lax begin Lax470956.NPHardness
+% lax begin Lax888481.NPHardness
 \begin{definition}[\NP-Hardness on a Class of Instances]
 A scheduling problem is \emph{\NP-hard} if every language in \NP\ has a polynomial-time
 many-one reduction to it. It is \emph{\NP-hard on a class} $\mathcal{C}$ of instances if
 the reductions can be chosen to produce only instances in $\mathcal{C}$.
 \end{definition}
 % lax end
-% lax begin Lax470956.PolynomialReduction
+% lax begin Lax888481.PolynomialReduction
 The reductions we construct are computed by word RAM programs in time polynomial in the
 number of bits of the input, which is polynomial time on a Turing machine.
 % lax end
 
 \section{\textsf{W[1]}-Hardness for Number \texorpdfstring{$\boldsymbol{m}$}{m} of Machines}\label{sec:1}
 
-% lax begin Lax470956.MulticolouredClique
+% lax begin Lax888481.MulticolouredClique
 \begin{definition}[\MCC]
 We are given a $k$-partite graph $G=(V_0\uplus V_1\uplus\ldots\uplus V_{k-1},E)$ and are
 asked whether $G$ contains a clique of size $k$. The $k$ vertex parts are called
@@ -147,7 +147,7 @@ asked whether $G$ contains a clique of size $k$. The $k$ vertex parts are called
 % lax end
 \MCC\ parameterized by $k$ is \Wone-hard~\cite{FHRV09}.
 
-% lax begin Lax470956.Construction1
+% lax begin Lax888481.Construction1
 \begin{construction}\label{const:w1hard}
 Let $G=(V_0\uplus V_1\uplus\ldots\uplus V_{k-1},E)$ be a $k$-partite graph with $n_G$
 vertices. Let $<_\pi$ be the total ordering of $V:=V_0\uplus\ldots\uplus V_{k-1}$ that
@@ -211,7 +211,7 @@ $j_v^{(\ell)}$ and $j_v^{(\ell,\ell')}$ then have consecutive intervals, as illu
     \label{fig:w1_overview}
 \end{figure}
 
-% lax begin Lax470956Proofs.Construction1Renum.correct
+% lax begin Lax888481Proofs.Construction1Renum.correct
 \begin{lemma}[Lemmas~1 and~2 of~\cite{HIMS24}]\label{lem:corr1}
 Let $I$ be the \ProbEM\ instance computed from $G$ as specified by \Cref{const:w1hard}.
 Then $G$ contains a clique of size $k$ if and only if there is a feasible schedule
@@ -229,7 +229,7 @@ $\binom{k}{2}$ selected edges to agree on one vertex per color.
 \end{proof}
 % lax end
 
-% lax begin Lax470956.Theorem1
+% lax begin Lax888481.Theorem1
 \begin{theorem}\label{thm:w1hard}
 \MCC\ parameterized by the number $k$ of colors has a parameterized reduction to \ProbEM\
 parameterized by the number $m$ of machines. The reduction is \Cref{const:w1hard}, and it
@@ -241,7 +241,7 @@ Since \MCC\ is \Wone-hard, \ProbEM\ is \Wone-hard when parameterized by $m$. The
 
 \section{\textsf{NP}-Hardness for Constant \texorpdfstring{$\boldsymbol{\pmax}$}{pmax}}\label{sec:nph}
 
-% lax begin Lax470956.SatVariant
+% lax begin Lax888481.SatVariant
 \begin{definition}[\SAT]
 We are given a Boolean formula $\phi$ in conjunctive normal form where every clause has
 exactly three literals and every variable appears at most four times, and are asked
@@ -249,12 +249,12 @@ whether $\phi$ has a satisfying assignment.
 \end{definition}
 \SAT\ is \NP-hard~\cite{Tovey84}.
 % lax end
-% lax begin Lax470956.Exact34Encoding
+% lax begin Lax888481.Exact34Encoding
 For the reduction, $\phi$ is given as a word that lists, for the $h$th literal of each
 clause, its variable, whether it is negated, and which appearance of its variable it is.
 % lax end
 
-% lax begin Lax470956.Construction2
+% lax begin Lax888481.Construction2
 \begin{construction}\label{const:nph}
 Let $\phi$ be a formula as above. We construct an instance $I$ of \ProbEM\ as follows.
 \begin{itemize}
@@ -288,7 +288,7 @@ All jobs have weight one. See \Cref{fig:pmax} for an illustration.
     \label{fig:pmax}
 \end{figure}
 
-% lax begin Lax470956Proofs.Construction2.correct
+% lax begin Lax888481Proofs.Construction2.correct
 \begin{lemma}[Lemmas~3 and~4 of~\cite{HIMS24}]\label{lem:nphcorr}
 Let $I$ be the \ProbEM\ instance computed from $\phi$ as specified by \Cref{const:nph}.
 Then $\phi$ is satisfiable if and only if there is a feasible schedule for $I$ such that
@@ -304,7 +304,7 @@ non-overlapping literal jobs, so a satisfying assignment yields a schedule of al
 \end{proof}
 % lax end
 
-% lax begin Lax470956.Theorem2
+% lax begin Lax888481.Theorem2
 \begin{theorem}\label{thm:nph}
 It is \NP-hard to decide whether all jobs of a \ProbEM\ instance can be scheduled, even
 when $\pmax\le 25$ and all jobs have unit weight.
@@ -313,20 +313,20 @@ when $\pmax\le 25$ and all jobs have unit weight.
 
 \section{\textsf{FPT} for the Combination of \texorpdfstring{$\boldsymbol{m}$ and $\boldsymbol{\pmax}$}{m and pmax}}\label{sec:FPTalt}
 
-% lax begin Lax470956.Preprocessing
+% lax begin Lax888481.Preprocessing
 \begin{construction}\label{con:effective}
 Let $I$ be an instance of \ProbEM. For every interval $[r,d)$ and every machine $i$ let
 $S^{(i)}_{[r,d)}$ denote the set of the $m$ highest-weighted jobs that have interval
 $[r,d)$ and are eligible on machine $i$, where ties are broken by the index of the job. All
 jobs that are not contained in any set $S^{(i)}_{[r,d)}$ are discarded.
 \end{construction}
-% lax begin Lax470956Proofs.Preprocessing.optimumOn_keep
+% lax begin Lax888481Proofs.Preprocessing.optimumOn_keep
 \begin{lemma}[Lemma~5 of~\cite{HIMS24}]\label{lem:EM2EM}
 Let $I'$ be obtained from $I$ by applying \Cref{con:effective}. Then the maximum weight of
 a feasible schedule is the same for $I$ and $I'$.
 \end{lemma}
 % lax end
-% lax begin Lax470956Proofs.Preprocessing.card_keep_alive_le
+% lax begin Lax888481Proofs.Preprocessing.card_keep_alive_le
 \begin{observation}[Observation~5 of~\cite{HIMS24}]\label{obs:fpt}
 Let $I'$ be obtained from $I$ by applying \Cref{con:effective}. Then for every time step
 $t$ there are at most $m^2\pmax^2$ jobs in $I'$ whose interval contains $t$.
@@ -342,7 +342,7 @@ $t$ there are at most $m^2\pmax^2$ jobs in $I'$ whose interval contains $t$.
     \label{fig:m2p2-interval}
 \end{figure}
 
-% lax begin Lax470956.DynamicProgram
+% lax begin Lax888481.DynamicProgram
 For a time step $t$ let $J_t$ be the set of jobs whose interval contains $t$. The dynamic
 programming table $T_t:(J_t\cup\{\bot\})^m\to\mathbb{N}$ is defined as follows: the entry
 $T_t[\ell_1,\ldots,\ell_m]$ is the maximum weight of the scheduled jobs that start at or
@@ -359,7 +359,7 @@ where the maximum is over the valid entries of $T_t$ such that every job $\ell_i
 still processed at time $t+1$ satisfies $\ell'_i=\ell_i$, and every job $\ell'_i$ that
 starts at or before $t$ satisfies $\ell_i=\ell'_i$. The table $T_t$ has at most
 $(|J_t|+1)^m$ entries.
-% lax begin Lax470956Proofs.DynamicProgram.dp_eq_optAt
+% lax begin Lax888481Proofs.DynamicProgram.dp_eq_optAt
 \begin{lemma}[Lemma~6 of~\cite{HIMS24}]\label{lem:dpcorrectness2}
 The recursion above correctly computes $T_t[\ell_1,\ldots,\ell_m]$ for every time step $t$
 and every valid entry. In particular, for $D=\max_j d_j$ the entry
@@ -368,7 +368,7 @@ $T_D[\bot,\ldots,\bot]$ is the maximum weight of a feasible schedule.
 % lax end
 % lax end
 
-% lax begin Lax470956.Theorem3
+% lax begin Lax888481.Theorem3
 \begin{theorem}\label{thm:fpt}
 There are a word RAM program and a constant $c$ such that for every instance $x$ of
 \ProbEM\ with target weight $W$, at every word length $w$ satisfying the input

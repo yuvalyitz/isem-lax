@@ -1,5 +1,5 @@
 specVersion: "1"
-id: lax-470956
+id: lax-888481
 leanVersion: v4.33.0
 mathlibVersion: db584cd6d46c92f209a44c0f1c829460d327499d
 title: Interval Scheduling with Eligible Machine Sets
@@ -44,6 +44,4 @@ bibEntries:
 paper:
   folder: paper
   main: main.tex
-issue:
-  repositoryId: 1320232165
-  number: 138
+supersedes: lax-470956

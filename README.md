@@ -1,6 +1,6 @@
 # Interval Scheduling with Eligible Machine Sets
 
-A [Lax archive](https://github.com/lax-archive/lax) submission (`lax-470956`) formalizing
+A [Lax archive](https://github.com/lax-archive/lax) submission (`lax-888481`) formalizing
 the three results of Hermelin, Itzhaki, Molter and Shabtay, *On the Parameterized
 Complexity of Interval Scheduling with Eligible Machine Sets*, Journal of Computer and
 System Sciences 144 (2024): W[1]-hardness for the number of machines, para-NP-hardness for
@@ -31,22 +31,22 @@ reports `17 concepts · 27 proofs`.
 
 To check a single module while editing, from `proofs/`:
 
-    lake build Lax470956Proofs.Theorem3Fpt
+    lake build Lax888481Proofs.Theorem3Fpt
 
 To audit axioms yourself, write a scratch file **outside** the package:
 
     cat > /tmp/ax.lean <<'LEAN'
-    import Lax470956Proofs
-    #print axioms Lax470956Proofs.Construction1Main.mcc_fptReduces_byMachines
-    #print axioms Lax470956Proofs.Theorem2.npHardOn_allSchedulable_pmax_le
-    #print axioms Lax470956Proofs.Theorem3.fptTime_byMachinesAndPmax
+    import Lax888481Proofs
+    #print axioms Lax888481Proofs.Construction1Main.mcc_fptReduces_byMachines
+    #print axioms Lax888481Proofs.Theorem2.npHardOn_allSchedulable_pmax_le
+    #print axioms Lax888481Proofs.Theorem3.fptTime_byMachinesAndPmax
     LEAN
 
 and run `lake env lean /tmp/ax.lean` from `proofs/`. Expect `propext`, `Classical.choice`
 and `Quot.sound` for all three, and `Lax345332.ThreeFourSat.npHard` for the second.
 
-> Anything placed inside `proofs/Lax470956Proofs/` must also be imported by
-> `Lax470956Proofs.lean`, or the build is rejected. Keep scratch work elsewhere.
+> Anything placed inside `proofs/Lax888481Proofs/` must also be imported by
+> `Lax888481Proofs.lean`, or the build is rejected. Keep scratch work elsewhere.
 
 ## Reading Guide
 
@@ -56,16 +56,16 @@ contains their Lean proofs. Start with the definitions, encodings, and main theo
 Suggested order:
 
 1. `abstract.md` — the three results in prose.
-2. `concepts/Lax470956/Scheduling.lean` — the problem: instances, feasible schedules, the
+2. `concepts/Lax888481/Scheduling.lean` — the problem: instances, feasible schedules, the
    optimum.
-3. `concepts/Lax470956/InstanceEncoding.lean` and `BinaryEncoding.lean` — how an instance
+3. `concepts/Lax888481/InstanceEncoding.lean` and `BinaryEncoding.lean` — how an instance
    becomes a word. This is where a scheduling problem becomes something a machine is handed,
    so it deserves the closest reading.
-4. `concepts/Lax470956/ParameterizedComplexity.lean`, `NPHardness.lean` and
+4. `concepts/Lax888481/ParameterizedComplexity.lean`, `NPHardness.lean` and
    `PolynomialReduction.lean` — what FPT, fpt-reduction and NP-hardness mean here, on the
    word RAM.
-5. `concepts/Lax470956/SchedulingProblems.lean` — the problems the theorems are about.
-6. `concepts/Lax470956/Theorem1.lean`, `Theorem2.lean`, `Theorem3.lean` — the results.
+5. `concepts/Lax888481/SchedulingProblems.lean` — the problems the theorems are about.
+6. `concepts/Lax888481/Theorem1.lean`, `Theorem2.lean`, `Theorem3.lean` — the results.
 7. The machinery behind each: `MulticolouredClique.lean` and `Construction1.lean` for
    Theorem 1; `SatVariant.lean`, `Exact34Encoding.lean` and `Construction2.lean` for
    Theorem 2; `Preprocessing.lean` and `DynamicProgram.lean` for Theorem 3.

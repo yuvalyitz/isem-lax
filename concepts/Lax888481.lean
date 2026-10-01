@@ -1,0 +1,17 @@
+import Lax888481.BinaryEncoding
+import Lax888481.Construction1
+import Lax888481.Construction2
+import Lax888481.DynamicProgram
+import Lax888481.Exact34Encoding
+import Lax888481.InstanceEncoding
+import Lax888481.MulticolouredClique
+import Lax888481.NPHardness
+import Lax888481.ParameterizedComplexity
+import Lax888481.PolynomialReduction
+import Lax888481.Preprocessing
+import Lax888481.SatVariant
+import Lax888481.Scheduling
+import Lax888481.SchedulingProblems
+import Lax888481.Theorem1
+import Lax888481.Theorem2
+import Lax888481.Theorem3
