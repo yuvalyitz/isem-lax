@@ -6,13 +6,13 @@ complexity of interval scheduling with eligible machine sets*, Journal of Comput
 System Sciences 144 (2024): W[1]-hardness for the number of machines, para-NP-hardness for
 the largest processing time, and fixed-parameter tractability for the two combined.
 
-**Status.** All 26 statements are proved, with no `sorry`. Theorems 1 and 3 rest on
-nothing beyond Lean's three standard axioms. Theorem 2 rests, in addition, on one cited
-result that this submission states and does not prove: the NP-hardness of
-(3,4)-satisfiability (Tovey 1984), `SatVariant.sat34_npHard`. The archive therefore records
-Theorem 2 as open until that statement is discharged. The class W[1] is not formalized;
-Theorem 1 is stated as the fpt-reduction from Multicoloured Clique, whose W[1]-completeness
-is cited. See `abstract.md` for the mathematics.
+**Status.** All statements are proved, with no `sorry`. Theorems 1 and 3 rest on nothing
+beyond Lean's three standard axioms. Theorem 2 rests, in addition, on the NP-hardness of
+(3,4)-satisfiability (Tovey 1984), which is proved in the submission `lax-345332` and used here
+through its statement (`SatVariant.sat34_npHard` is discharged from
+`Lax345332.ThreeFourSat.npHard`); the archive counts Theorem 2 as proved once that submission
+is. The class W[1] is not formalized; Theorem 1 is stated as the fpt-reduction from
+Multicoloured Clique, whose W[1]-completeness is cited. See `abstract.md` for the mathematics.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ To audit axioms yourself, write a scratch file **outside** the package:
     LEAN
 
 and run `lake env lean /tmp/ax.lean` from `proofs/`. Expect `propext`, `Classical.choice`
-and `Quot.sound` for all three, and `Lax470956.SatVariant.sat34_npHard` for the second.
+and `Quot.sound` for all three, and `Lax345332.ThreeFourSat.npHard` for the second.
 
 > Anything placed inside `proofs/Lax470956Proofs/` must also be imported by
 > `Lax470956Proofs.lean`, or the build is rejected. Keep scratch work elsewhere.
@@ -83,15 +83,15 @@ running time.
     manifest.yaml     id, title, authors, pinned Lean + mathlib, bibliography
     abstract.md       the prose account, rendered on the archive website
     concepts/         statements only, as axioms — 17 modules
-    proofs/           the proofs, each tagged with the statement it discharges — 80 modules
+    proofs/           the proofs, each tagged with the statement it discharges — 81 modules
 
 A concept module states results as `axiom`s. A proof is a `theorem` whose docstring carries
-`conclusion: <that axiom's full name>`; the build checks the pairing. The one axiom without
-a proof is `SatVariant.sat34_npHard`, Tovey's theorem.
+`conclusion: <that axiom's full name>`; the build checks the pairing. Every axiom has a proof;
+`SatVariant.sat34_npHard`, Tovey's theorem, is discharged from the statement of `lax-345332`.
 
 ## Dependencies
 
-Beyond mathlib, this submission builds on five others in the archive:
+Beyond mathlib, this submission builds on six others in the archive:
 
 - `lax-434930`, *Classical Complexity Classes* (Édouard Bonnet): P and NP.
 - `lax-429075`, *The Cook–Levin Theorem* (Édouard Bonnet): CNF formulas and polynomial
@@ -102,6 +102,9 @@ Beyond mathlib, this submission builds on five others in the archive:
   encoding of a graph as a word.
 - `lax-759944`, *Computability and polynomial-time equivalence of Turing machines and word
   RAMs* (Szymon Toruńczyk).
+- `lax-345332`, *(3,4)-SAT is NP-hard* (Yuval Itzhaki, Claude): Tovey's theorem, cited through
+  its statement. While that submission is a draft the build has to admit it as a sibling
+  checkout: `lax build . --nonstrict`.
 
 Three packages are required with their proofs, and the build warns about each
 (`proof-dependency`): the IMP+ language and its `run_vcg` tactic from `lax-808846`, the

@@ -61,6 +61,7 @@ import Lax470956Proofs.ReadAll
 import Lax470956Proofs.ReadHdr
 import Lax470956Proofs.Reduce
 import Lax470956Proofs.Renumbering
+import Lax470956Proofs.Sat34
 import Lax470956Proofs.SweepBody
 import Lax470956Proofs.SweepDP
 import Lax470956Proofs.SweepLoop

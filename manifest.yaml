@@ -69,6 +69,9 @@ bibEntries:
     \  doi     = {10.1016/0166-218X(84)90081-7}
 
     }\n"
+paper:
+  folder: paper
+  main: main.tex
 issue:
   repositoryId: 1320232165
   number: 138

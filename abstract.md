@@ -16,8 +16,7 @@ edge job is one unit shorter, and colours are numbered from zero.
 **Theorem 2.** The problem is NP-hard even when every processing time is at most $25$ and
 every weight is $1$, and so para-NP-hard for $p_{\max}$. The reduction starts from
 $(3,4)$-satisfiability — three literals per clause, at most four occurrences of each
-variable — whose NP-hardness (Tovey 1984) is the one result taken as given and left
-unproven in this submission.
+variable — whose NP-hardness (Tovey 1984) is proved in the archive submission lax-345332 and used here through its statement.
 
 **Theorem 3.** For the combined parameter $m + p_{\max}$ the problem is fixed-parameter
 tractable: a dynamic program over machine occupancy, run on the word RAM, decides it

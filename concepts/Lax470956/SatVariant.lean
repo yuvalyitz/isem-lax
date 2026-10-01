@@ -19,7 +19,8 @@ The restriction is a predicate on the CNF formulas of the archive's Cook–Levin
 so the encoding and the notion of satisfiability are shared with unrestricted SAT.
 Occurrences are counted with multiplicity.
 
-Tovey's theorem is stated here and not proved; Theorem 2 assumes it.
+Tovey's theorem is stated here, and proved in the submission `lax-345332`, from which the proofs
+of this submission take it: the language of that submission is this one.
 -/
 
 namespace Lax470956.SatVariant

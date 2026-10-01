@@ -1,0 +1,411 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsthm,amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{ifthen}
+\usepackage{tikz}
+\usepackage[colorlinks,urlcolor=blue!50!black,linkcolor=blue!50!black,citecolor=green!40!black]{hyperref}
+\usepackage{cleveref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{observation}{Observation}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{construction}{Construction}
+\crefname{construction}{Construction}{Constructions}
+\Crefname{construction}{Construction}{Constructions}
+\crefname{observation}{Observation}{Observations}
+\Crefname{observation}{Observation}{Observations}
+
+\newcommand{\pmax}{p_{\max}}
+\newcommand{\ProbEM}{\textsc{Interval Scheduling on Eligible Machines}}
+\newcommand{\MCC}{\textsc{Multicolored Clique}}
+\newcommand{\SAT}{\textsc{(3,4)-SAT}}
+\newcommand{\bigO}{O}
+\newcommand{\FPT}{\textnormal{\textsf{FPT}}}
+\newcommand{\Wone}{\textnormal{\textsf{W[1]}}}
+\newcommand{\NP}{\textnormal{\textsf{NP}}}
+
+\title{On the Parameterized Complexity of Interval Scheduling\\ with Eligible Machine Sets, formalized}
+\author{Yuval Itzhaki \and Claude}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In \ProbEM, a set of $n$ jobs is to be processed non-preemptively on a set of $m$ machines.
+Each job has a processing time, a deadline, a weight, and a set of eligible machines that
+can process it. The goal is to find a maximum weight subset of jobs that can each be
+processed on one of its eligible machines such that it completes exactly at its deadline.
+Hermelin, Itzhaki, Molter and Shabtay~\cite{HIMS24} showed that the problem is \Wone-hard
+when parameterized by the number $m$ of machines, \NP-hard even when the largest processing
+time $\pmax$ is constant, and fixed-parameter tractable for the combined parameter
+$m+\pmax$. All three results are proved in Lean. This note presents the definitions,
+constructions and statements as they are formalized, in the notation of~\cite{HIMS24}, and
+links each of them to its Lean counterpart.
+\end{abstract}
+
+\section{Introduction}
+
+In an interval scheduling problem each job can be processed only in a fixed time interval,
+and a schedule only decides which machine processes it. In \ProbEM\ every job $j$ comes
+with a set $M_j$ of eligible machines. Arkin and Silverberg~\cite{AS87} showed that the
+problem is strongly \NP-hard and solvable in $\bigO(n^{m+1})$ time, and whether it is
+fixed-parameter tractable for $m$ was Open Problem~8 in the list of Mnich and van
+Bevern~\cite{MvB18}. The paper~\cite{HIMS24} answers this question negatively
+(\Cref{thm:w1hard}), shows that a constant $\pmax$ does not help either (\Cref{thm:nph}),
+and gives an algorithm for the combination of both parameters (\Cref{thm:fpt}).
+
+% lax begin lax-808846
+Running times are stated on the word RAM: a program is a fixed list of instructions
+operating on words of $w$ bits, and its running time is the number of instructions it
+executes. A statement about a running time is a statement about one program, at every word
+length that admits the input.
+% lax end
+
+\section{Preliminaries}\label{sec:0}
+
+% lax begin Lax470956.Scheduling
+\begin{definition}[\ProbEM]
+We have a set of $n$ jobs $\{j_1,\ldots,j_n\}$ and a set of $m$ machines
+$\{i_1,\ldots,i_m\}$, each of which can process one job at a time. Every job $j$ has a
+processing time $p_j\ge 1$, a deadline $d_j\ge p_j$, a weight $w_j$, and a set of eligible
+machines $M_j\subseteq\{i_1,\ldots,i_m\}$. Job $j$ can be processed only in the interval
+$[d_j-p_j,d_j)$. We denote the largest processing time by $\pmax=\max_{1\le j\le n}p_j$.
+
+A \emph{schedule} is a function $\sigma:\{j_1,\ldots,j_n\}\to\{i_1,\ldots,i_m,\bot\}$ with
+$\sigma(j)\in M_j\cup\{\bot\}$; job $j$ is scheduled on machine $\sigma(j)$, or not
+scheduled if $\sigma(j)=\bot$. Two jobs $j,j'$ are \emph{in conflict} if
+$[d_j-p_j,d_j)\cap[d_{j'}-p_{j'},d_{j'})\neq\emptyset$. A schedule $\sigma$ is
+\emph{feasible} if there is no pair of conflicting jobs $j,j'$ with
+$\sigma(j)=\sigma(j')\neq\bot$. Its weight is $w(\sigma)=\sum_{\sigma(j)\neq\bot}w_j$.
+The goal is to find a feasible schedule of maximum weight.
+\end{definition}
+% lax end
+
+% lax begin Lax470956.InstanceEncoding
+An instance is given to a word RAM as a word of numbers: $n$, $m$, the processing times,
+the deadlines, the weights, and the sets $M_j$ as $n+1$ offsets into one array that lists
+the eligible machines of each job in turn. In the decision version the word ends with the
+target weight $W$.
+% lax end
+% lax begin Lax470956.BinaryEncoding
+For \NP-hardness an instance is encoded as a binary word, with the sets $M_j$ as an
+$n\times m$ matrix.
+% lax end
+
+% lax begin Lax470956.SchedulingProblems
+We consider three problems on these words: deciding whether there is a feasible schedule
+$\sigma$ with $w(\sigma)\ge W$, parameterized by $m$; the same problem parameterized by
+$m+\pmax$; and deciding whether there is a feasible schedule in which all jobs are
+scheduled, parameterized by $\pmax$.
+% lax end
+
+% lax begin Lax470956.ParameterizedComplexity
+\begin{definition}[\FPT\ and parameterized reductions]
+A parameterized problem is \emph{fixed-parameter tractable} if there are a program, a
+constant $c$ and a function $g$ such that the program decides every input $x$ with
+parameter $k$ within $c\cdot g(k)\cdot(|x|+1)$ instructions. A \emph{parameterized
+reduction} from a problem $P$ to a problem $Q$ is a function on words that is computed by a
+program within such a bound, maps yes-instances to yes-instances and no-instances to
+no-instances, and maps an input with parameter $k$ to one with parameter at most $h(k)$
+for some function $h$.
+\end{definition}
+The bound is linear in $|x|$, where $f(k)\cdot|x|^{\bigO(1)}$ is usually allowed, so a
+problem that is fixed-parameter tractable in this sense is so in the usual sense, and a
+parameterized reduction in this sense is one in the usual sense.
+% lax end
+
+% lax begin Lax470956.NPHardness
+\begin{definition}[\NP-hardness on a class of instances]
+A scheduling problem is \emph{\NP-hard} if every language in \NP\ has a polynomial-time
+many-one reduction to it. It is \emph{\NP-hard on a class} $\mathcal{C}$ of instances if
+the reductions can be chosen to produce only instances in $\mathcal{C}$.
+\end{definition}
+% lax end
+% lax begin Lax470956.PolynomialReduction
+The reductions we construct are computed by word RAM programs in time polynomial in the
+number of bits of the input, which is polynomial time on a Turing machine.
+% lax end
+
+\section{\textsf{W[1]}-hardness for number \texorpdfstring{$\boldsymbol{m}$}{m} of machines}\label{sec:1}
+
+% lax begin Lax470956.MulticolouredClique
+\begin{definition}[\MCC]
+We are given a $k$-partite graph $G=(V_0\uplus V_1\uplus\ldots\uplus V_{k-1},E)$ and are
+asked whether $G$ contains a clique of size $k$. The $k$ vertex parts are called
+\emph{colors}, and the parameter is $k$.
+\end{definition}
+% lax end
+\MCC\ parameterized by $k$ is \Wone-hard~\cite{FHRV09}.
+
+% lax begin Lax470956.Construction1
+\begin{construction}\label{const:w1hard}
+Let $G=(V_0\uplus V_1\uplus\ldots\uplus V_{k-1},E)$ be a $k$-partite graph with $n_G$
+vertices. Let $<_\pi$ be the total ordering of $V:=V_0\uplus\ldots\uplus V_{k-1}$ that
+orders the vertices by color and breaks ties by index, so that $u<_\pi v$ whenever
+$u\in V_\ell$, $v\in V_{\ell'}$ and $\ell<\ell'$. Let $\pi(v)\in\{1,\ldots,n_G\}$ denote the
+ordinal position of $v$ in $<_\pi$. Let $c_1=n_G+1$, $c_2=(k-1)n_Gc_1+n_G+1$, and
+$c_3=(kn_G+k^2n_G)n_Gc_2+1$.
+
+We create $m=\binom{k}{2}+1$ machines: one \emph{edge selection machine} for each color
+combination $\ell,\ell'$ with $\ell<\ell'$, and one \emph{validation machine}. We create
+the following jobs.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}llll@{}}
+\toprule
+job & processing time & deadline & weight\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{vertex jobs}, for $v\in V_\ell$ and each color $\ell'\neq\ell$}\\
+$j_v^{(\ell)}$ & $k+2$ & $(k+2)\pi(v)+1$ & $1$\\
+$j_v^{(\ell')}$ & $1$ & $(k+2)\pi(v)-\ell'$ & $c_1$\\
+\multicolumn{4}{@{}l}{\emph{edge jobs}, for $e=\{u,v\}\in E$ with $u\in V_\ell$, $v\in V_{\ell'}$, $\ell<\ell'$}\\
+$j_e$ & $(k+2)(\pi(v)-\pi(u))-\ell+\ell'-1$ & $(k+2)\pi(v)-\ell-1$ & $c_2(\pi(v)-\pi(u))+c_3$\\
+\multicolumn{4}{@{}l}{\emph{color combination jobs}, for $\ell<\ell'$, each $u\in V_\ell$ and each $v\in V_{\ell'}$}\\
+$j_u^{(\ell,\ell')}$ & $(k+2)\pi(u)-\ell'-2$ & $(k+2)\pi(u)-\ell'-1$ & $c_2\pi(u)$\\
+$j_v^{(\ell,\ell')}$ & $(k+2)(n_G-\pi(v))+\ell+2$ & $(k+2)n_G+2$ & $c_2(n_G-\pi(v))$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The validation machine is an eligible machine of all vertex jobs. The edge selection
+machine for color combination $\ell,\ell'$ with $\ell<\ell'$ is a further eligible machine
+of the vertex jobs $j_u^{(\ell')}$ with $u\in V_\ell$ and $j_v^{(\ell)}$ with
+$v\in V_{\ell'}$, and it is the only eligible machine of the color combination jobs
+$j_u^{(\ell,\ell')}$, $j_v^{(\ell,\ell')}$ and of the edge jobs $j_e$ with $e=\{u,v\}$,
+$u\in V_\ell$ and $v\in V_{\ell'}$. The target weight is
+\[
+W=\binom{k}{2}c_3+\binom{k}{2}n_Gc_2+(k-1)n_Gc_1+k.
+\]
+\end{construction}
+Two details are done slightly differently than in~\cite{HIMS24}: the colors are numbered
+from $0$, and the processing time of an edge job is one unit shorter. On the edge
+selection machine for $\ell,\ell'$ the jobs $j_u^{(\ell,\ell')}$, $j_u^{(\ell')}$, $j_e$,
+$j_v^{(\ell)}$ and $j_v^{(\ell,\ell')}$ then have consecutive intervals, as illustrated in
+\Cref{fig:w1_edge_selection,fig:w1_overview}.
+% lax end
+
+\begin{figure}[tb]
+    \centering
+    \input{figures/edge_selection}
+    \caption{The edge selection machine for color combination $\ell,\ell'$ with
+    $\ell<\ell'$. Depicted are intervals of jobs relating to $u\in V_\ell$, $v\in V_{\ell'}$,
+    and $e=\{u,v\}\in E$. Gray intervals correspond to jobs that are not eligible on the
+    machine.}
+    \label{fig:w1_edge_selection}
+\end{figure}
+
+\begin{figure}[tb]
+    \centering
+    \input{figures/mcc_overview}
+    \caption{\Cref{const:w1hard} for a clique on $k=4$ colors, drawn to scale, with the
+    schedule of weight $W$. Each row is a machine: the validation machine (gray) processes
+    the vertex job $j_v^{(\ell)}$ of every vertex, and the edge selection machine of each
+    color combination processes a color combination job (pale), a unit vertex job, the edge
+    job (bold), a unit vertex job and a color combination job.}
+    \label{fig:w1_overview}
+\end{figure}
+
+% lax begin Lax470956Proofs.Construction1Renum.correct
+\begin{lemma}[Lemmas~1 and~2 of~\cite{HIMS24}]\label{lem:corr1}
+Let $I$ be the \ProbEM\ instance computed from $G$ as specified by \Cref{const:w1hard}.
+Then $G$ contains a clique of size $k$ if and only if there is a feasible schedule
+$\sigma$ for $I$ with $w(\sigma)\ge W$.
+\end{lemma}
+\begin{proof}[Proof idea]
+Given a clique, schedule on the edge selection machine for $\ell,\ell'$ the edge job of the
+clique edge between $V_\ell$ and $V_{\ell'}$ together with the four jobs around it, and
+schedule the vertex jobs $j_v^{(\ell)}$ of the clique vertices and all vertex jobs of the
+other vertices with weight $c_1$ on the validation machine. Conversely, a schedule of
+weight $W$ must schedule exactly one edge job on every edge selection machine, since $c_3$
+exceeds the total weight of all other jobs. The weights $c_2$ force the two color
+combination jobs next to it to belong to its endpoints, and the weights $c_1$ force the
+$\binom{k}{2}$ selected edges to agree on one vertex per color.
+\end{proof}
+% lax end
+
+% lax begin Lax470956.Theorem1
+\begin{theorem}\label{thm:w1hard}
+\MCC\ parameterized by the number $k$ of colors has a parameterized reduction to \ProbEM\
+parameterized by the number $m$ of machines. The reduction is \Cref{const:w1hard}, and it
+produces $m=\binom{k}{2}+1$ machines.
+\end{theorem}
+% lax end
+Since \MCC\ is \Wone-hard, \ProbEM\ is \Wone-hard when parameterized by $m$. The class
+\Wone\ is not formalized; the formalized statement is the reduction.
+
+\section{\textsf{NP}-hardness for constant \texorpdfstring{$\boldsymbol{\pmax}$}{pmax}}\label{sec:nph}
+
+% lax begin Lax470956.SatVariant
+\begin{definition}[\SAT]
+We are given a Boolean formula $\phi$ in conjunctive normal form where every clause has
+exactly three literals and every variable appears at most four times, and are asked
+whether $\phi$ has a satisfying assignment.
+\end{definition}
+\SAT\ is \NP-hard~\cite{Tovey84}.
+% lax end
+% lax begin Lax470956.Exact34Encoding
+For the reduction, $\phi$ is given as a word that lists, for the $h$th literal of each
+clause, its variable, whether it is negated, and which appearance of its variable it is.
+% lax end
+
+% lax begin Lax470956.Construction2
+\begin{construction}\label{const:nph}
+Let $\phi$ be a formula as above. We construct an instance $I$ of \ProbEM\ as follows.
+\begin{itemize}
+\item For each variable $x$ we create two machines $i_x^T,i_x^F$ and one job $j_x$ with
+  deadline and processing time $25$ that is eligible on $i_x^T$ and $i_x^F$.
+\item For each clause $c$ we create three machines $i_c^{(1)},i_c^{(2)},i_c^{(3)}$ and
+  nine jobs.
+\item Three of them are \emph{literal jobs} $j_c^{(1)},j_c^{(2)},j_c^{(3)}$ with
+  processing time one. Let the $h$th literal of $c$ be the $k$th appearance of variable
+  $x$. Then the deadline of $j_c^{(h)}$ is $2k+8h-8$. It is eligible on
+  $i_c^{(2)},i_c^{(3)}$, and on $i_x^T$ if $x$ appears non-negated and on $i_x^F$
+  otherwise.
+\item For each literal job $j_c^{(h)}$ with deadline $d$ we create two \emph{wrapper
+  jobs}: $j_{c,\alpha}^{(h)}$ with deadline and processing time $d-1$, and
+  $j_{c,\omega}^{(h)}$ with deadline $25$ and processing time $25-d$. All wrapper jobs are
+  eligible on $i_c^{(1)},i_c^{(2)},i_c^{(3)}$.
+\end{itemize}
+All jobs have weight one. See \Cref{fig:pmax} for an illustration.
+\end{construction}
+% lax end
+
+\begin{figure}[tb]
+    \centering
+    \input{figures/sat_overview}
+    \caption{\Cref{const:nph} applied to the clause $c=(x\vee y\vee\neg z)$, which contains
+    the third appearance of $x$, the second appearance of $y$, and the first appearance of
+    $z$. The dashed lines delimit the slots of the literal jobs. Shown is a schedule for an
+    assignment that sets $x$ to true: $j_x$ is on $i_x^F$, the literal job $j_c^{(1)}$ is
+    on $i_x^T$ together with the literal jobs of other appearances of $x$ (pale), and its
+    two wrapper jobs are on $i_c^{(1)}$.}
+    \label{fig:pmax}
+\end{figure}
+
+% lax begin Lax470956Proofs.Construction2.correct
+\begin{lemma}[Lemmas~3 and~4 of~\cite{HIMS24}]\label{lem:nphcorr}
+Let $I$ be the \ProbEM\ instance computed from $\phi$ as specified by \Cref{const:nph}.
+Then $\phi$ is satisfiable if and only if there is a feasible schedule for $I$ such that
+all jobs are scheduled.
+\end{lemma}
+\begin{proof}[Proof idea]
+Job $j_x$ blocks one of $i_x^T,i_x^F$ for the whole time; we set $x$ to true if and only if
+$j_x$ is scheduled on $i_x^F$. In a schedule of all jobs the two wrapper jobs of each
+literal job are on the same machine, so the machines $i_c^{(2)},i_c^{(3)}$ have room for
+two of the three literal jobs of $c$, and the third one is scheduled on a machine of its
+variable, which makes its literal true. Distinct appearances of a variable have
+non-overlapping literal jobs, so a satisfying assignment yields a schedule of all jobs.
+\end{proof}
+% lax end
+
+% lax begin Lax470956.Theorem2
+\begin{theorem}\label{thm:nph}
+It is \NP-hard to decide whether all jobs of a \ProbEM\ instance can be scheduled, even
+when $\pmax\le 25$ and all jobs have unit weight.
+\end{theorem}
+% lax end
+
+\section{\textsf{FPT} for the combination of \texorpdfstring{$\boldsymbol{m}$ and $\boldsymbol{\pmax}$}{m and pmax}}\label{sec:FPTalt}
+
+% lax begin Lax470956.Preprocessing
+\begin{construction}\label{con:effective}
+Let $I$ be an instance of \ProbEM. For every interval $[r,d)$ and every machine $i$ let
+$S^{(i)}_{[r,d)}$ denote the set of the $m$ highest-weighted jobs that have interval
+$[r,d)$ and are eligible on machine $i$, where ties are broken by the index of the job. All
+jobs that are not contained in any set $S^{(i)}_{[r,d)}$ are discarded.
+\end{construction}
+% lax begin Lax470956Proofs.Preprocessing.optimumOn_keep
+\begin{lemma}[Lemma~5 of~\cite{HIMS24}]\label{lem:EM2EM}
+Let $I'$ be obtained from $I$ by applying \Cref{con:effective}. Then the maximum weight of
+a feasible schedule is the same for $I$ and $I'$.
+\end{lemma}
+% lax end
+% lax begin Lax470956Proofs.Preprocessing.card_keep_alive_le
+\begin{observation}[Observation~5 of~\cite{HIMS24}]\label{obs:fpt}
+Let $I'$ be obtained from $I$ by applying \Cref{con:effective}. Then for every time step
+$t$ there are at most $m^2\pmax^2$ jobs in $I'$ whose interval contains $t$.
+\end{observation}
+% lax end
+% lax end
+
+\begin{figure}[tb]
+    \centering
+    \input{figures/intervals}
+    \caption{There are at most $\pmax^2$ distinct intervals of length at most $\pmax$ that
+    contain time step $t$.}
+    \label{fig:m2p2-interval}
+\end{figure}
+
+% lax begin Lax470956.DynamicProgram
+For a time step $t$ let $J_t$ be the set of jobs whose interval contains $t$. The dynamic
+programming table $T_t:(J_t\cup\{\bot\})^m\to\mathbb{N}$ is defined as follows: the entry
+$T_t[\ell_1,\ldots,\ell_m]$ is the maximum weight of the scheduled jobs that start at or
+before $t$, over all feasible schedules such that for each $i\in\{1,\ldots,m\}$, at time
+$t$ machine $i$ processes job $\ell_i$ if $\ell_i\neq\bot$ and is idle if $\ell_i=\bot$. An
+entry is \emph{valid} if $i\in M_{\ell_i}$ for all $i$ with $\ell_i\neq\bot$ and no job
+appears twice. For a valid entry, $T_0[\ell_1,\ldots,\ell_m]$ is the total weight of the
+jobs $\ell_1,\ldots,\ell_m$, and
+\[
+T_{t+1}[\ell'_1,\ldots,\ell'_m]=\max_{[\ell_1,\ldots,\ell_m]\to[\ell'_1,\ldots,\ell'_m]}
+T_t[\ell_1,\ldots,\ell_m]\;+\sum_{\substack{j\in\{\ell'_1,\ldots,\ell'_m\}\\ d_j-p_j=t+1}}w_j,
+\]
+where the maximum is over the valid entries of $T_t$ such that every job $\ell_i$ that is
+still processed at time $t+1$ satisfies $\ell'_i=\ell_i$, and every job $\ell'_i$ that
+starts at or before $t$ satisfies $\ell_i=\ell'_i$. The table $T_t$ has at most
+$(|J_t|+1)^m$ entries.
+% lax begin Lax470956Proofs.DynamicProgram.dp_eq_optAt
+\begin{lemma}[Lemma~6 of~\cite{HIMS24}]\label{lem:dpcorrectness2}
+The recursion above correctly computes $T_t[\ell_1,\ldots,\ell_m]$ for every time step $t$
+and every valid entry. In particular, for $D=\max_j d_j$ the entry
+$T_D[\bot,\ldots,\bot]$ is the maximum weight of a feasible schedule.
+\end{lemma}
+% lax end
+% lax end
+
+% lax begin Lax470956.Theorem3
+\begin{theorem}\label{thm:fpt}
+There are a word RAM program and a constant $c$ such that for every instance $x$ of
+\ProbEM\ with target weight $W$ that fits into words, the program decides whether there is
+a feasible schedule $\sigma$ with $w(\sigma)\ge W$ within
+\[
+c\cdot(m\cdot\pmax+1)^{2m}\cdot(m+1)\cdot(|x|+1)
+\]
+instructions. Hence \ProbEM\ is fixed-parameter tractable when parameterized by $m+\pmax$.
+\end{theorem}
+% lax end
+This is the running time $\bigO((m\cdot\pmax)^{2m}\cdot mn)$ of~\cite{HIMS24} with explicit
+constants: by \Cref{obs:fpt} we have $|J_t|\le m^2\pmax^2$ after applying
+\Cref{con:effective}, so every table has at most $(m\cdot\pmax+1)^{2m}$ entries.
+
+\begin{thebibliography}{9}
+\bibitem{AS87}
+E.~M. Arkin and E.~B. Silverberg.
+\newblock Scheduling jobs with fixed start and end times.
+\newblock \emph{Discrete Applied Mathematics} 18(1):1--8, 1987.
+\bibitem{FHRV09}
+M.~R. Fellows, D.~Hermelin, F.~Rosamond and S.~Vialette.
+\newblock On the parameterized complexity of multiple-interval graph problems.
+\newblock \emph{Theoretical Computer Science} 410(1):53--61, 2009.
+\bibitem{HIMS24}
+D.~Hermelin, Y.~Itzhaki, H.~Molter and D.~Shabtay.
+\newblock On the parameterized complexity of interval scheduling with eligible machine sets.
+\newblock \emph{Journal of Computer and System Sciences} 144:103533, 2024.
+\bibitem{MvB18}
+M.~Mnich and R.~van Bevern.
+\newblock Parameterized complexity of machine scheduling: 15 open problems.
+\newblock \emph{Computers \& Operations Research} 100:254--261, 2018.
+\bibitem{Tovey84}
+C.~A. Tovey.
+\newblock A simplified NP-complete satisfiability problem.
+\newblock \emph{Discrete Applied Mathematics} 8(1):85--89, 1984.
+\end{thebibliography}
+
+\end{document}

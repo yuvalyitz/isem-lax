@@ -3,3 +3,4 @@ paper.pdf
 paper-web.tar
 lake-manifest.json
 .lake/
+.DS_Store
